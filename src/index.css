@@ -1,7 +1,7 @@
 :root {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #2f241f;
-  background: #f7f1e8;
+  font-family: 'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #332B23;
+  background: #FFF7EB;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -14,9 +14,10 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #f7f1e8;
+  background: #FFF7EB;
+  color: #332B23;
 }
 button, input { font: inherit; }
 button { cursor: pointer; }
 a { color: inherit; }
-::selection { background: #e7a85d; color: #2f241f; }
+::selection { background: #CC3A63; color: #FFF7EB; }
