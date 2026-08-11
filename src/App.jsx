@@ -34,16 +34,16 @@ export default function App() {
   const toggleWishlist = (cafeId) => setWishlist(prev => prev.includes(cafeId) ? prev.filter(id => id !== cafeId) : [...prev, cafeId]);
 
   return (
-    <div className="min-h-screen bg-[#FFF4E6] text-[#3A1F14] font-sans flex flex-col justify-between">
+    <div className="min-h-screen bg-[#F47B3A] text-[#3A1F14] font-sans flex flex-col justify-between site-shell">
       <div>
         <Navbar wishlistCount={wishlist.length} onOpenWishlist={() => setIsWishlistOpen(true)} onOpenInstaModal={() => setIsInstaModalOpen(true)} activeTab={activeTab} setActiveTab={setActiveTab} />
         <Hero searchQuery={searchQuery} setSearchQuery={(q) => { setSearchQuery(q); if (activeTab !== 'explore') setActiveTab('explore'); }} onOpenInstaModal={() => setIsInstaModalOpen(true)} setActiveTab={setActiveTab} />
-        <main className="bg-[#FFF4E6] pb-16">
+        <main className="bg-[#F47B3A] pb-16 site-main">
           <RecommendationPlanner cafes={cafesData} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={setSelectedCafe} />
-          {activeTab === 'explore' && <CafeExplorer cafes={cafesData} searchQuery={searchQuery} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={(cafe) => setSelectedCafe(cafe)} />}
-          {activeTab === 'quick' && <QuickDecisions cafes={cafesData} onSelectCafe={(cafe) => setSelectedCafe(cafe)} />}
-          {activeTab === 'plans' && <DatePlansSection />}
-          {activeTab === 'metro' && <MetroGuideSection />}
+          {activeTab === 'explore' && <div id="section-explore" className="scroll-mt-24"><CafeExplorer cafes={cafesData} searchQuery={searchQuery} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={(cafe) => setSelectedCafe(cafe)} /></div>}
+          {activeTab === 'quick' && <div id="section-quick" className="scroll-mt-24"><QuickDecisions cafes={cafesData} onSelectCafe={(cafe) => setSelectedCafe(cafe)} /></div>}
+          {activeTab === 'plans' && <div id="section-plans" className="scroll-mt-24"><DatePlansSection /></div>}
+          {activeTab === 'metro' && <div id="section-metro" className="scroll-mt-24"><MetroGuideSection /></div>}
         </main>
       </div>
       <Footer onOpenInstaModal={() => setIsInstaModalOpen(true)} />
@@ -53,7 +53,7 @@ export default function App() {
       {selectedCafe && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#3A1F14]/75 backdrop-blur-md animate-fadeIn" onClick={() => setSelectedCafe(null)}>
           <div className="relative w-full max-w-2xl rounded-[28px] bg-[#FFF4E6] border border-[#E7B894] p-5 sm:p-8 shadow-2xl text-[#3A1F14] max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setSelectedCafe(null)} aria-label="Close cafe details" className="absolute top-4 right-4 p-2.5 rounded-full bg-[#FCE6D0] text-[#7A2E12] hover:text-[#CC3A63] border border-[#E7B894] transition-all"><X className="w-5 h-5" /></button>
+            <button type="button" onClick={() => setSelectedCafe(null)} aria-label="Close cafe details" className="absolute top-4 right-4 p-2.5 rounded-full bg-[#FCE6D0] text-[#7A2E12] hover:text-[#CC3A63] border border-[#E7B894] transition-all"><X className="w-5 h-5" /></button>
             <div className="flex flex-wrap items-center gap-2 mb-3"><span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#FCE6D0] border border-[#E7B894] text-[#7A2E12]">{selectedCafe.zone}</span><span className="px-3 py-1 rounded-full text-xs font-medium bg-white/70 text-[#7A2E12] border border-[#E7B894]">{selectedCafe.vibeTag}</span></div>
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 mb-2"><h2 className="font-serif text-3xl font-bold text-[#3A1F14]">{selectedCafe.name}</h2><span className="text-sm font-bold px-3 py-1 rounded-full bg-[#CC3A63] text-white whitespace-nowrap">{selectedCafe.budget} for 2</span></div>
             <p className="text-xs sm:text-sm text-[#806050] italic mb-6">Best for: {selectedCafe.bestFor}</p>
