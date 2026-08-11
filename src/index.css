@@ -10,22 +10,15 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background: #FFF4E6;
-  color: #3A1F14;
-}
+body { margin: 0; min-width: 320px; min-height: 100vh; background: #FFF4E6; color: #3A1F14; }
 button, input, select { font: inherit; }
 button { cursor: pointer; }
 a { color: inherit; }
 ::selection { background: #CC3A63; color: #FFF4E6; }
-
 section { scroll-margin-top: 88px; }
 
-/* Palette guard: old orange is mapped to the site's rose accent. */
-.bg-\[\#F47B3A\] { background-color: #CC3A63 !important; }
+/* Remove the old orange completely. Legacy orange utility classes now use the site's cream/rose palette. */
+.bg-\[\#F47B3A\] { background-color: #FCE6D0 !important; }
 .hover\:bg-\[\#D9682D\]:hover { background-color: #B52F55 !important; }
 .hover\:bg-\[\#F47B3A\]:hover { background-color: #B52F55 !important; }
 .text-\[\#F47B3A\] { color: #CC3A63 !important; }
