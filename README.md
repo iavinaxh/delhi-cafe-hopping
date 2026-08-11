@@ -15,7 +15,7 @@ Instead of making people browse a long restaurant directory, the homepage asks:
 - How far are you willing to travel?
 - Anything else, such as vegetarian, quiet, romantic, rooftop, birthday, dinner + walk, etc.
 
-The site then searches Google Places and ranks the results against the request. When an OpenAI API key is configured, an AI ranking layer explains **why** each candidate fits without inventing current restaurant facts.
+The site searches OpenStreetMap place data around the requested area and ranks the results against the request. When an OpenAI API key is configured, an AI ranking layer explains **why** each candidate fits without inventing current restaurant facts.
 
 ## Data architecture
 
@@ -26,11 +26,11 @@ React planner
       ↓
 /api/recommend
       ↓
-Google Places API (New)
+Photon geocoding (OpenStreetMap)
       ↓
-Candidate restaurants / cafes
+Overpass API (OpenStreetMap places)
       ↓
-Rule-based budget + relevance ranking
+Distance + preference ranking
       ↓
 OpenAI ranking + explanation (optional)
       ↓
@@ -39,7 +39,7 @@ Personalized recommendation cards
 Google Maps / website / Zomato search
 ```
 
-Google is the live source for current place facts. The local curated dataset remains as a fallback and for the editorial sections such as quick picks, date plans and wishlist.
+The free OpenStreetMap layer is used for live place discovery, so the project does **not** require a paid Google Places API key. The local curated dataset remains as a fallback and powers the editorial sections such as quick picks, date plans and wishlist.
 
 ## Features
 
@@ -51,9 +51,10 @@ Google is the live source for current place facts. The local curated dataset rem
 - Cuisine preference
 - Maximum travel radius
 - Free-text requirements
-- Google Places live search
+- OpenStreetMap live place discovery
+- Photon location search
 - Optional OpenAI ranking/explanation layer
-- Google Maps links
+- Google Maps links without Google Places API
 - Zomato search links for dynamic results
 - Verified Swiggy Dineout links for curated restaurants only
 - 36+ curated Delhi NCR destinations
@@ -68,23 +69,22 @@ Google is the live source for current place facts. The local curated dataset rem
 Create a `.env` file locally or add these variables in Vercel. **Never commit real API keys.**
 
 ```env
-GOOGLE_PLACES_API_KEY=your_google_places_api_key
+# Optional. Restaurant discovery does not require a paid Google Places key.
 OPENAI_API_KEY=your_openai_api_key
 OPENAI_MODEL=gpt-5-mini
 ```
 
-`OPENAI_API_KEY` is optional. Without it, the backend still returns Google Places candidates using deterministic ranking. With it, the site adds the AI explanation/ranking layer.
+`OPENAI_API_KEY` is optional. Without it, the backend still returns OpenStreetMap candidates using deterministic ranking. With it, the site adds the AI explanation/ranking layer.
 
-## Google Places setup
+## Free place-data stack
 
-1. Create or select a Google Cloud project.
-2. Attach a billing account.
-3. Enable **Places API (New)**.
-4. Create an API key.
-5. Restrict the key to the required Google Maps Platform APIs and your server environment.
-6. Add the key as `GOOGLE_PLACES_API_KEY` in Vercel.
+The project uses public OpenStreetMap-based services:
 
-Google Maps Platform is **not unlimited/free forever**. India has free monthly usage thresholds for eligible Core Service SKUs, and usage above those thresholds is billed. Keep budget alerts and usage limits enabled.
+- **Photon** for converting a neighbourhood, landmark or metro station into coordinates.
+- **Overpass API** for finding mapped cafes, restaurants and fast-food places around those coordinates.
+- **Google Maps links** only for opening the place in Maps. The site does not call the paid Google Places API.
+
+Public OpenStreetMap services have fair-use and capacity limits. The app therefore uses bounded searches, a small result set, a short request path and a fallback curated dataset. If the project grows significantly, the discovery layer should move to a dedicated/self-hosted OSM/Overpass setup or a commercial POI provider.
 
 ## OpenAI setup
 
@@ -104,7 +104,7 @@ npm run dev
 npm run build
 ```
 
-For the serverless `/api` route locally, use a Vercel-compatible development environment such as `vercel dev`, or deploy to Vercel and configure the environment variables there.
+For the serverless `/api` route locally, use a Vercel-compatible development environment such as `vercel dev`, or deploy to Vercel. The public OpenStreetMap discovery services do not require an API key for this MVP.
 
 ## Project structure
 
@@ -148,7 +148,9 @@ delhi-cafe-hopping/
 
 ## Important product rule
 
-The AI is **not the restaurant database**. Google Places supplies current place data. The AI ranks and explains supplied candidates. The model is instructed not to invent current prices, offers, opening hours, reservation availability or restaurant facts.
+The AI is **not the restaurant database**. OpenStreetMap supplies the discovered place facts. The AI only ranks and explains supplied candidates. The model is instructed not to invent current prices, offers, opening hours, reservation availability or restaurant facts.
+
+Likewise, the app does not create fake Swiggy Dineout links for dynamically discovered places. Dineout is shown only for curated venues where a verified URL is already stored.
 
 ## Curator
 
