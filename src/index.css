@@ -9,7 +9,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: #F47B3A; }
 body { margin: 0; min-width: 320px; min-height: 100vh; background: #F47B3A; color: #3A1F14; }
 button, input, select { font: inherit; }
 button { cursor: pointer; }
@@ -17,7 +17,12 @@ a { color: inherit; }
 ::selection { background: #7A2E12; color: #FFF4E6; }
 section { scroll-margin-top: 88px; }
 
+/* The page background is always orange. Cream is reserved for cards and content surfaces. */
+.site-shell, .site-main { background-color: #F47B3A !important; }
+
 @media (max-width: 640px) {
+  html, body, #root { background-color: #F47B3A; }
+  .site-shell, .site-main { background-color: #F47B3A !important; }
   body { font-size: 15px; }
   button, a { touch-action: manipulation; }
   input, select, button { min-height: 44px; }
