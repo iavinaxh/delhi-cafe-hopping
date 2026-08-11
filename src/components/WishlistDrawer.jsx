@@ -1,0 +1,12 @@
+import React from 'react';
+import { X, Heart, MapPin, Trash2 } from 'lucide-react';
+
+export default function WishlistDrawer({ isOpen, onClose, wishlist, cafes, onToggleWishlist, onSelectCafe }) {
+  if (!isOpen) return null;
+  const wishlistedCafes = cafes.filter(c => wishlist.includes(c.id));
+  return <div className="fixed inset-0 z-50 overflow-hidden bg-black/70 backdrop-blur-sm animate-fadeIn"><div className="absolute inset-y-0 right-0 max-w-full flex pl-10"><div className="w-screen max-w-md bg-stone-950 border-l border-amber-900/40 text-stone-100 shadow-2xl flex flex-col justify-between">
+    <div className="p-6 border-b border-stone-800 flex items-center justify-between"><div className="flex items-center space-x-2"><Heart className="w-6 h-6 text-rose-500 fill-rose-500" /><h2 className="font-serif text-xl font-bold">Saved Wishlist ({wishlistedCafes.length})</h2></div><button onClick={onClose} className="p-2 rounded-xl bg-stone-900 text-stone-400"><X className="w-5 h-5" /></button></div>
+    <div className="p-6 overflow-y-auto flex-1 space-y-4">{wishlistedCafes.length ? wishlistedCafes.map(cafe=><div key={cafe.id} className="p-4 rounded-2xl bg-stone-900 border border-stone-800 space-y-2"><div className="flex items-start justify-between"><div><span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 block">{cafe.zone}</span><h4 onClick={()=>{onSelectCafe(cafe);onClose();}} className="font-serif text-lg font-bold hover:text-amber-300 cursor-pointer">{cafe.name}</h4></div><button onClick={()=>onToggleWishlist(cafe.id)} className="p-1.5 rounded-lg bg-stone-950 text-stone-400"><Trash2 className="w-4 h-4" /></button></div><div className="flex items-center justify-between text-xs text-stone-400"><span className="text-emerald-400 font-bold">{cafe.budget}</span><a href={cafe.mapsUrl} target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline flex items-center gap-1"><MapPin className="w-3 h-3" /> Map Link</a></div></div>) : <div className="py-16 text-center text-stone-400"><Heart className="w-12 h-12 text-stone-700 mx-auto mb-3" /><p className="font-serif text-lg font-bold text-stone-300">Your Wishlist is Empty</p><p className="text-xs mt-1">Click the heart icon on any cafe card to save it here.</p></div>}</div>
+    <div className="p-6 border-t border-stone-800 bg-stone-900/90 text-xs text-stone-400 text-center">Wishlist items are automatically saved in your browser local storage.</div>
+  </div></div></div>;
+}
