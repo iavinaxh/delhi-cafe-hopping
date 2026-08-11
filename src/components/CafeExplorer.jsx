@@ -7,14 +7,10 @@ export default function CafeExplorer({ cafes, searchQuery, wishlist, onToggleWis
   const [zone,setZone]=useState('All Zones');
   const [vibe,setVibe]=useState('All Vibes');
   const filtered=useMemo(()=>cafes.filter(c=>{const q=searchQuery.toLowerCase(); const text=[c.name,c.zone,c.vibeTag,c.bestFor,c.whatToOrder].join(' ').toLowerCase(); return (!q||text.includes(q))&&(zone==='All Zones'||c.zone===zone)&&(vibe==='All Vibes'||c.vibeTag===vibe)}),[cafes,searchQuery,zone,vibe]);
-  return <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  return <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-[#CC3A63]">
     <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-7">
-      <div><p className="text-xs uppercase tracking-widest text-[#FFF7EB] font-bold">Explore</p><h2 className="font-serif text-3xl font-bold text-white">Cafes & Places</h2><p className="text-sm text-white/80 mt-1">Start from Paschim Vihar. Keep the food target near ₹1,000 for two.</p></div>
-      <div className="flex flex-wrap gap-2">
-        <select value={zone} onChange={e=>setZone(e.target.value)} className="bg-[#F9F0E0] border border-[#A2AB73] rounded-xl px-3 py-2 text-xs text-[#332B23] focus:outline-none focus:ring-2 focus:ring-[#A2AB73]"><option>All Zones</option>{ZONES.filter(x=>x!=='All Zones').map(x=><option key={x}>{x}</option>)}</select>
-        <select value={vibe} onChange={e=>setVibe(e.target.value)} className="bg-[#F9F0E0] border border-[#A2AB73] rounded-xl px-3 py-2 text-xs text-[#332B23] focus:outline-none focus:ring-2 focus:ring-[#A2AB73]"><option>All Vibes</option>{VIBES.filter(x=>x!=='All Vibes').map(x=><option key={x}>{x}</option>)}</select>
-        <span className="px-3 py-2 rounded-xl bg-[#F9F0E0] border border-[#A2AB73] text-xs text-[#56602E] flex items-center gap-1"><Filter className="w-3 h-3"/>{filtered.length} places</span>
-      </div>
+      <div><p className="text-xs uppercase tracking-widest text-[#F9F0E0] font-bold">Explore</p><h2 className="font-serif text-3xl font-bold text-[#241F1A]">Cafes & Places</h2><p className="text-sm text-[#F9F0E0] mt-1">Browse date-friendly spots across Delhi NCR, with food picks, budgets, routes and direct links.</p></div>
+      <div className="flex flex-wrap gap-2"><select value={zone} onChange={e=>setZone(e.target.value)} className="bg-[#F9F0E0] border border-[#A2AB73]/70 rounded-xl px-3 py-2 text-xs text-[#332B23] focus:outline-none focus:ring-2 focus:ring-[#CC3A63]/30"><option>All Zones</option>{ZONES.filter(x=>x!=='All Zones').map(x=><option key={x}>{x}</option>)}</select><select value={vibe} onChange={e=>setVibe(e.target.value)} className="bg-[#F9F0E0] border border-[#A2AB73]/70 rounded-xl px-3 py-2 text-xs text-[#332B23] focus:outline-none focus:ring-2 focus:ring-[#CC3A63]/30"><option>All Vibes</option>{VIBES.filter(x=>x!=='All Vibes').map(x=><option key={x}>{x}</option>)}</select><span className="px-3 py-2 rounded-xl bg-[#F9F0E0] border border-[#A2AB73]/70 text-xs text-[#56602E] flex items-center gap-1"><Filter className="w-3 h-3"/>{filtered.length} places</span></div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">{filtered.map(c=><CafeCard key={c.id} cafe={c} isWishlisted={wishlist.includes(c.id)} onToggleWishlist={onToggleWishlist} onSelectCafe={onSelectCafe}/>)}</div>
   </section>;
