@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coffee, QrCode, Heart } from 'lucide-react';
+import { Coffee, QrCode, Heart, Linkedin } from 'lucide-react';
 import InstagramIcon from './InstagramIcon';
 
 export default function Footer({ onOpenInstaModal }) {
@@ -11,8 +11,14 @@ export default function Footer({ onOpenInstaModal }) {
           <p className="text-xs text-[#6D5143] leading-relaxed">Tell us your location, budget, people and vibe. Get a focused shortlist of cafes and restaurants worth considering.</p>
         </div>
         <div>
-          <h4 className="text-xs uppercase font-bold tracking-wider text-[#CC3A63] mb-3">Curator & Instagram</h4>
-          <div className="space-y-2 text-xs"><p className="text-[#4E382E]">Curated by <strong className="text-[#7A2E12]">Avinash</strong></p><button type="button" onClick={onOpenInstaModal} className="px-3.5 py-2 rounded-xl bg-[#CC3A63] text-white font-semibold text-xs inline-flex items-center gap-2 hover:bg-[#B52F55] transition-all"><InstagramIcon className="w-4 h-4"/><span>@iavinaxh on Instagram</span><QrCode className="w-3.5 h-3.5 opacity-80"/></button></div>
+          <h4 className="text-xs uppercase font-bold tracking-wider text-[#CC3A63] mb-3">Curator & Social</h4>
+          <div className="space-y-2 text-xs">
+            <p className="text-[#4E382E]">Curated by <strong className="text-[#7A2E12]">Avinash</strong></p>
+            <div className="flex flex-wrap items-center gap-2">
+              <button type="button" onClick={onOpenInstaModal} className="px-3.5 py-2 rounded-xl bg-[#CC3A63] text-white font-semibold text-xs inline-flex items-center gap-2 hover:bg-[#B52F55] transition-all"><InstagramIcon className="w-4 h-4"/><span>@iavinaxh on Instagram</span><QrCode className="w-3.5 h-3.5 opacity-80"/></button>
+              <a href="https://www.linkedin.com/in/avinash-singh-232522254" target="_blank" rel="noopener noreferrer" className="px-3.5 py-2 rounded-xl bg-[#FFF4E6] border border-[#E7B894] text-[#7A2E12] font-semibold text-xs inline-flex items-center gap-2 hover:bg-white transition-all"><Linkedin className="w-4 h-4"/><span>LinkedIn</span></a>
+            </div>
+          </div>
         </div>
         <div>
           <h4 className="text-xs uppercase font-bold tracking-wider text-[#CC3A63] mb-3">Built for better decisions</h4>
