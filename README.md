@@ -1,100 +1,131 @@
 # Delhi NCR Restaurant Finder
 
-> A personalized Delhi NCR restaurant and cafe discovery website. Tell it your **location, budget, group size, occasion, cuisine, vibe and travel radius**, and it finds a short list of places that fit. Curated by **[@iavinaxh](https://instagram.com/iavinaxh)**.
+> A curated Delhi NCR cafe and restaurant discovery website that helps people choose where to eat based on **area, budget, group size and vibe** instead of browsing hundreds of listings manually.
+
+Curated by **[@iavinaxh](https://instagram.com/iavinaxh)**.
 
 ## What the product does
 
-Instead of making people browse a long restaurant directory, the homepage asks:
+The website is built around a simple idea: users should answer a few useful questions and immediately get a practical shortlist from a curated Delhi NCR restaurant database.
 
-- Where are you?
-- What is your total budget?
-- How many people?
-- What is the occasion?
-- What vibe do you want?
-- Which cuisine?
-- How far are you willing to travel?
-- Anything else, such as vegetarian, quiet, romantic, rooftop, birthday, dinner + walk, etc.
+Users can select:
 
-The site searches OpenStreetMap place data around the requested area and ranks the results against the request. When an OpenAI API key is configured, an AI ranking layer explains **why** each candidate fits without inventing current restaurant facts.
+- **Delhi NCR area** from the supported location list
+- **Total budget** for the group
+- **Number of people**
+- **Vibe**, such as romantic, quiet, aesthetic, casual, youthful, rooftop, outdoor or lively
 
-## Data architecture
+The recommendation engine ranks restaurants and cafes from the project's curated catalogue. It does not invent new restaurants or depend on live place-discovery APIs for the core recommendation flow.
+
+## Recommendation flow
 
 ```text
 User preferences
       ↓
-React planner
+React recommendation planner
       ↓
-/api/recommend
+Curated Delhi NCR restaurant catalogue
       ↓
-Photon geocoding (OpenStreetMap)
+Area + vibe + budget + group-size ranking
       ↓
-Overpass API (OpenStreetMap places)
-      ↓
-Distance + preference ranking
-      ↓
-OpenAI ranking + explanation (optional)
+Group budget calculation
       ↓
 Personalized recommendation cards
       ↓
-Google Maps / website / Zomato search
+Maps / Zomato / verified venue links
 ```
 
-The free OpenStreetMap layer is used for live place discovery, so the project does **not** require a paid Google Places API key. The local curated dataset remains as a fallback and powers the editorial sections such as quick picks, date plans and wishlist.
+## Budget model
+
+Restaurant prices in the catalogue are stored as an **approximate cost for 2 people** unless the source provides another clear basis.
+
+The planner automatically scales the estimate with the selected group size.
+
+For example:
+
+```text
+Catalogue estimate: ₹800–₹1,200 for 2 people
+
+2 people → ₹800–₹1,200
+4 people → ₹1,600–₹2,400
+6 people → ₹2,400–₹3,600
+```
+
+The recommendation cards clearly distinguish the original **2-person listing** from the calculated estimate for the user's selected group size.
+
+The planner also shows when the selected budget is below the estimated minimum spend for a venue, for example:
+
+> Minimum recommended budget: ₹1,600 for 4 people.
+
+These are planning estimates, not guaranteed bills. Restaurant prices, menus, taxes, offers and ordering choices can change.
 
 ## Features
 
-- **Personalized restaurant finder** for Delhi NCR
-- Location input or browser **current location**
-- Total budget for the whole group
-- Group size
-- Occasion and vibe filters
-- Cuisine preference
-- Maximum travel radius
-- Free-text requirements
-- OpenStreetMap live place discovery
-- Photon location search
-- Optional OpenAI ranking/explanation layer
-- Google Maps links without Google Places API
-- Zomato search links for dynamic results
-- Verified Swiggy Dineout links for curated restaurants only
-- 36+ curated Delhi NCR destinations
-- Quick decision picks
+- **Curated Delhi NCR restaurant finder**
+- Fixed area/location selection instead of unreliable free-text location search
+- Total group budget
+- Group-size aware recommendations
+- Automatic budget scaling from the catalogue's 2-person baseline
+- Minimum recommended budget guidance
+- Vibe-based ranking
+- Curated restaurant and cafe catalogue covering major Delhi NCR areas
+- Google Maps links for venue navigation
+- Zomato links/searches where available
+- Verified dining links only when an actual verified URL is stored
+- Quick decision recommendations
 - Ready-made date plans
-- Metro route guide
+- Metro route guidance
 - Wishlist saved in browser storage
+- Responsive design
 - Warm cream / olive / pink visual theme
+
+## Data philosophy
+
+The curated database is the core product data source.
+
+The project does **not** create fictional venues to fill search results. Restaurants and cafes are added to the catalogue based on known venues and researched listings. Each entry can contain information such as:
+
+- Name
+- Area / zone
+- Approximate price for two
+- Vibe / use case
+- What to order
+- Curator notes
+- Maps link
+- Zomato link
+- Website or verified dining link when available
+
+Because restaurant information changes, prices and availability should always be treated as approximate and checked with the venue before visiting.
+
+## Why the project does not use Google Places API
+
+The core recommendation experience does not require a paid Google Places API key.
+
+Google Maps is used as a navigation destination through links. Restaurant recommendations themselves come from the project's curated catalogue.
+
+This keeps the MVP predictable, avoids API-cost surprises and prevents a third-party place-search failure from producing an empty recommendation screen.
+
+## AI integration
+
+AI can be added as a ranking/explanation layer in the future, but **AI is not the restaurant database**.
+
+The product rule is simple:
+
+> The system may explain and rank known restaurant data. It must not invent restaurants, prices, offers, opening hours, reservation availability or other current facts.
+
+If an AI provider is enabled, its role should remain constrained to the supplied catalogue and user preferences.
 
 ## Environment variables
 
-Create a `.env` file locally or add these variables in Vercel. **Never commit real API keys.**
+Create a `.env` file locally or add variables in your deployment environment. **Never commit real API keys.**
 
 ```env
-# Optional. Restaurant discovery does not require a paid Google Places key.
+# Optional AI layer
 OPENAI_API_KEY=your_openai_api_key
 OPENAI_MODEL=gpt-5-mini
 ```
 
-`OPENAI_API_KEY` is optional. Without it, the backend still returns OpenStreetMap candidates using deterministic ranking. With it, the site adds the AI explanation/ranking layer.
-
-## Free place-data stack
-
-The project uses public OpenStreetMap-based services:
-
-- **Photon** for converting a neighbourhood, landmark or metro station into coordinates.
-- **Overpass API** for finding mapped cafes, restaurants and fast-food places around those coordinates.
-- **Google Maps links** only for opening the place in Maps. The site does not call the paid Google Places API.
-
-These public services are free to access but are **not an unlimited commercial API**. Their infrastructure is shared and subject to fair-use, capacity and policy limits. The app therefore keeps searches user-triggered, bounded to a maximum discovery radius, limits the result set, caches repeated requests for a short period and has a fallback curated dataset. If usage becomes significant, the correct next step is to move to a dedicated/self-hosted OSM/Overpass stack or a commercial POI provider rather than increasing load on public servers. See the [Overpass usage guidance](https://dev.overpass-api.de/overpass-doc/en/preface/commons.html) and [OpenStreetMap service policies](https://operations.osmfoundation.org/policies/).
-
-Place data is © OpenStreetMap contributors and available under the [ODbL](https://www.openstreetmap.org/copyright).
-
-## OpenAI setup
-
-1. Create an API key in the OpenAI Platform.
-2. Add it to Vercel as `OPENAI_API_KEY`.
-3. Optionally set `OPENAI_MODEL`.
-
-The OpenAI key is used only by the server-side `/api/recommend` endpoint. It is never exposed in browser code.
+The core curated recommendation flow does not require a paid Google Places API key.
 
 ## Local setup
 
@@ -106,7 +137,7 @@ npm run dev
 npm run build
 ```
 
-For the serverless `/api` route locally, use a Vercel-compatible development environment such as `vercel dev`, or deploy to Vercel. The public OpenStreetMap discovery services do not require an API key for this MVP.
+If serverless API routes are enabled in a deployment, use the deployment platform's compatible development command or deploy to the configured hosting environment.
 
 ## Project structure
 
@@ -130,6 +161,7 @@ delhi-cafe-hopping/
 │   │   └── ...
 │   ├── data/
 │   │   ├── cafes.js
+│   │   ├── discoveryCafes.js
 │   │   └── datePlans.js
 │   ├── App.jsx
 │   ├── index.css
@@ -143,23 +175,41 @@ delhi-cafe-hopping/
 
 ## Visual theme
 
-- `#FFF7EB` Cream background
-- `#F9F0E0` Warm surface/card
-- `#A2AB73` Olive secondary accent
-- `#CC3A63` Pink primary accent
+The current interface uses four core colours:
 
-## Important product rule
+- `#FFF7EB` — Cream background
+- `#F9F0E0` — Warm surface / cards
+- `#A2AB73` — Olive secondary accent
+- `#CC3A63` — Pink primary accent
 
-The AI is **not the restaurant database**. OpenStreetMap supplies the discovered place facts. The AI only ranks and explains supplied candidates. The model is instructed not to invent current prices, offers, opening hours, reservation availability or restaurant facts.
+## Product principles
 
-Likewise, the app does not create fake Swiggy Dineout links for dynamically discovered places. Dineout is shown only for curated venues where a verified URL is already stored.
+### 1. Do not show features that do not work reliably
+
+If a data source cannot support a feature properly, the feature should be removed or simplified rather than shown as a broken control.
+
+### 2. Recommendations must come from known data
+
+The finder recommends from the curated catalogue. It should never manufacture restaurants simply because the user entered a difficult combination of filters.
+
+### 3. Budget must mean something
+
+The displayed budget is the user's **total target for the selected group**, while catalogue prices are based on **2 people**. Estimates are scaled with group size and the UI explains the difference clearly.
+
+### 4. No fake booking links
+
+The project does not generate fake Swiggy Dineout or reservation URLs. A dining/booking link is shown only when a verified URL is available. Otherwise, the user gets the appropriate venue/search destination.
+
+### 5. Accuracy over pretending
+
+Current prices, offers, opening hours and availability can change. The site presents them as planning information rather than guaranteed facts.
 
 ## CI
 
-GitHub Actions runs `npm install` and `npm run build` on pushes and pull requests to `main` so frontend build regressions are caught automatically.
+GitHub Actions runs the project build on pushes and pull requests to `main` so frontend build regressions are caught automatically.
 
 ## Curator
 
 **Avinash Singh — @iavinaxh**
 
-Made for people who would rather answer a few questions than spend an hour deciding where to eat.
+Made for people who would rather answer a few useful questions than spend an hour deciding where to eat.
