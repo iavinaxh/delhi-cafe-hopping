@@ -51,7 +51,7 @@ export default function CafeCard({ cafe, isWishlisted, onToggleWishlist, onSelec
 
         <div className="mt-5 flex items-center justify-between gap-3">
           <div><p className="text-[10px] uppercase tracking-wider text-[#806050]">Listed budget</p><p className="text-base font-bold text-[#7A2E12] mt-0.5">{cafe.budget} <span className="font-normal text-[#806050]">/ 2 people</span></p></div>
-          <button type="button" onClick={showDetails} className="md:hidden text-[10px] font-semibold text-[#7A2E12] flex items-center gap-1" aria-expanded={expanded}>{expanded ? 'Hide details' : 'View details'}<ChevronDown className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} /></button>
+          <button type="button" onClick={expanded ? hideDetails : showDetails} className="md:hidden text-[10px] font-semibold text-[#7A2E12] flex items-center gap-1" aria-expanded={expanded}>{expanded ? 'Hide details' : 'View details'}<ChevronDown className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} /></button>
           <span className="hidden md:inline text-[10px] font-semibold text-[#7A2E12]">Click for details</span>
         </div>
       </div>
@@ -67,7 +67,7 @@ export default function CafeCard({ cafe, isWishlisted, onToggleWishlist, onSelec
         </div>
       </div>
 
-      {expanded && <div className="md:hidden grid grid-cols-3 gap-2 p-4 border-t border-[#E7B894] bg-[#FCE6D0]" onClick={stop}>
+      {expanded && <div className={`md:hidden grid ${hasDineout ? 'grid-cols-4' : 'grid-cols-3'} gap-2 p-4 border-t border-[#E7B894] bg-[#FCE6D0]`} onClick={stop}>
         <a href={cafe.mapsUrl} target="_blank" rel="noopener noreferrer" className="min-h-[44px] rounded-xl bg-[#7A2E12] text-[#FFF4E6] text-[10px] font-bold text-center flex flex-col items-center justify-center gap-0.5"><MapPin className="w-3.5 h-3.5" />MAPS</a>
         <a href={cafe.zomatoUrl || `https://www.zomato.com/ncr/restaurants?q=${encodeURIComponent(cafe.name)}`} target="_blank" rel="noopener noreferrer" className="min-h-[44px] rounded-xl bg-[#CC3A63] text-white text-[10px] font-bold text-center flex flex-col items-center justify-center gap-0.5"><Utensils className="w-3.5 h-3.5" />ZOMATO</a>
         <a href={cafe.websiteUrl || cafe.mapsUrl} target="_blank" rel="noopener noreferrer" className="min-h-[44px] rounded-xl bg-[#FFF4E6] border border-[#E7B894] text-[#7A2E12] text-[10px] font-bold text-center flex flex-col items-center justify-center gap-0.5"><Globe className="w-3.5 h-3.5" />WEB</a>
