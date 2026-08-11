@@ -34,11 +34,11 @@ export default function App() {
   const toggleWishlist = (cafeId) => setWishlist(prev => prev.includes(cafeId) ? prev.filter(id => id !== cafeId) : [...prev, cafeId]);
 
   return (
-    <div className="min-h-screen bg-[#CC3A63] text-[#241F1A] font-sans selection:bg-[#A2AB73] selection:text-white flex flex-col justify-between">
+    <div className="min-h-screen bg-[#F47B3A] text-[#3A1F14] font-sans flex flex-col justify-between">
       <div>
         <Navbar wishlistCount={wishlist.length} onOpenWishlist={() => setIsWishlistOpen(true)} onOpenInstaModal={() => setIsInstaModalOpen(true)} activeTab={activeTab} setActiveTab={setActiveTab} />
         <Hero searchQuery={searchQuery} setSearchQuery={(q) => { setSearchQuery(q); if (activeTab !== 'explore') setActiveTab('explore'); }} onOpenInstaModal={() => setIsInstaModalOpen(true)} setActiveTab={setActiveTab} />
-        <main className="bg-[#CC3A63] pb-16">
+        <main className="bg-[#F47B3A] pb-16">
           <RecommendationPlanner cafes={cafesData} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={setSelectedCafe} />
           {activeTab === 'explore' && <CafeExplorer cafes={cafesData} searchQuery={searchQuery} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={(cafe) => setSelectedCafe(cafe)} />}
           {activeTab === 'quick' && <QuickDecisions cafes={cafesData} onSelectCafe={(cafe) => setSelectedCafe(cafe)} />}
@@ -51,23 +51,23 @@ export default function App() {
       <WishlistDrawer isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlist={wishlist} cafes={cafesData} onToggleWishlist={toggleWishlist} onSelectCafe={(cafe) => setSelectedCafe(cafe)} />
 
       {selectedCafe && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#241F1A]/75 backdrop-blur-md animate-fadeIn">
-          <div className="relative w-full max-w-2xl rounded-3xl bg-[#FFF7EB] border border-[#A2AB73]/60 p-6 sm:p-8 shadow-2xl text-[#332B23] max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setSelectedCafe(null)} className="absolute top-4 right-4 p-2 rounded-full bg-[#F9F0E0] text-[#6D7650] hover:text-[#CC3A63] border border-[#A2AB73]/40 transition-all"><X className="w-5 h-5" /></button>
-            <div className="flex flex-wrap items-center gap-2 mb-3"><span className="px-3 py-1 rounded-lg text-xs font-semibold bg-[#A2AB73]/20 border border-[#A2AB73]/50 text-[#56602E]">{selectedCafe.zone}</span><span className="px-3 py-1 rounded-lg text-xs font-medium bg-[#F9F0E0] text-[#56602E] border border-[#A2AB73]/30">{selectedCafe.vibeTag}</span></div>
-            <div className="flex items-baseline justify-between gap-3 mb-2"><h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#332B23]">{selectedCafe.name}</h2><span className="text-sm font-bold px-3 py-1 rounded-full bg-[#A2AB73]/20 border border-[#A2AB73]/50 text-[#56602E] whitespace-nowrap">{selectedCafe.budget} for 2</span></div>
-            <p className="text-xs sm:text-sm text-[#786C5C] italic mb-6">Best for: {selectedCafe.bestFor}</p>
-            <div className="space-y-4 text-xs sm:text-sm text-[#4E453B] mb-8">
-              {selectedCafe.whatToOrder && <div className="p-4 rounded-2xl bg-[#F9F0E0] border border-[#A2AB73]/30"><span className="text-[#CC3A63] font-bold uppercase tracking-wider text-xs block mb-1">Recommended Order</span><p>{selectedCafe.whatToOrder}</p></div>}
-              {selectedCafe.metroRoute && <div className="p-4 rounded-2xl bg-[#F9F0E0] border border-[#A2AB73]/30"><span className="text-[#68713D] font-bold uppercase tracking-wider text-xs block mb-1">Getting There</span><p>{selectedCafe.metroRoute}</p></div>}
-              {selectedCafe.afterFood && <div className="p-4 rounded-2xl bg-[#F9F0E0] border border-[#A2AB73]/30"><span className="text-[#68713D] font-bold uppercase tracking-wider text-xs block mb-1">Post-Meal Walk & Activity</span><p>{selectedCafe.afterFood}</p></div>}
-              {selectedCafe.curatorTake && <div className="p-4 rounded-2xl bg-[#A2AB73]/15 border border-[#A2AB73]/35 italic text-[#56602E]"><strong className="not-italic text-[#CC3A63] block mb-1">Avinash's Take:</strong>"{selectedCafe.curatorTake}"</div>}
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#3A1F14]/75 backdrop-blur-md animate-fadeIn" onClick={() => setSelectedCafe(null)}>
+          <div className="relative w-full max-w-2xl rounded-[28px] bg-[#FFF4E6] border border-[#E7B894] p-5 sm:p-8 shadow-2xl text-[#3A1F14] max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setSelectedCafe(null)} aria-label="Close cafe details" className="absolute top-4 right-4 p-2.5 rounded-full bg-[#FCE6D0] text-[#7A2E12] hover:text-[#F47B3A] border border-[#E7B894] transition-all"><X className="w-5 h-5" /></button>
+            <div className="flex flex-wrap items-center gap-2 mb-3"><span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#FCE6D0] border border-[#E7B894] text-[#7A2E12]">{selectedCafe.zone}</span><span className="px-3 py-1 rounded-full text-xs font-medium bg-white/70 text-[#7A2E12] border border-[#E7B894]">{selectedCafe.vibeTag}</span></div>
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 mb-2"><h2 className="font-serif text-3xl font-bold text-[#3A1F14]">{selectedCafe.name}</h2><span className="text-sm font-bold px-3 py-1 rounded-full bg-[#F47B3A] text-white whitespace-nowrap">{selectedCafe.budget} for 2</span></div>
+            <p className="text-xs sm:text-sm text-[#806050] italic mb-6">Best for: {selectedCafe.bestFor}</p>
+            <div className="space-y-3 text-xs sm:text-sm text-[#5D4639] mb-8">
+              {selectedCafe.whatToOrder && <div className="p-4 rounded-2xl bg-[#FCE6D0] border border-[#E7B894]"><span className="text-[#F47B3A] font-bold uppercase tracking-wider text-xs block mb-1">Recommended Order</span><p>{selectedCafe.whatToOrder}</p></div>}
+              {selectedCafe.metroRoute && <div className="p-4 rounded-2xl bg-[#FCE6D0] border border-[#E7B894]"><span className="text-[#7A2E12] font-bold uppercase tracking-wider text-xs block mb-1">Getting There</span><p>{selectedCafe.metroRoute}</p></div>}
+              {selectedCafe.afterFood && <div className="p-4 rounded-2xl bg-[#FCE6D0] border border-[#E7B894]"><span className="text-[#7A2E12] font-bold uppercase tracking-wider text-xs block mb-1">Post-Meal Walk & Activity</span><p>{selectedCafe.afterFood}</p></div>}
+              {selectedCafe.curatorTake && <div className="p-4 rounded-2xl bg-[#7A2E12]/8 border border-[#E7B894] italic text-[#7A2E12]"><strong className="not-italic text-[#F47B3A] block mb-1">Avinash's Take:</strong>"{selectedCafe.curatorTake}"</div>}
             </div>
-            <div className={`grid ${selectedCafe.dineoutUrl ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2 sm:grid-cols-3'} gap-2 pt-4 border-t border-[#A2AB73]/30`}>
-              <a href={selectedCafe.mapsUrl} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-[#A2AB73] hover:bg-[#8F995F] text-white text-xs font-semibold flex flex-col items-center justify-center gap-1 transition-all"><MapPin className="w-4 h-4" /><span>Google Maps</span></a>
-              {selectedCafe.websiteUrl && <a href={selectedCafe.websiteUrl} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-[#F9F0E0] hover:bg-white border border-[#A2AB73]/40 text-[#56602E] text-xs font-semibold flex flex-col items-center justify-center gap-1 transition-all"><Globe className="w-4 h-4" /><span>Website</span></a>}
-              <a href={selectedCafe.zomatoUrl} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-[#CC3A63] hover:bg-[#B52F55] text-white text-xs font-semibold flex flex-col items-center justify-center gap-1 transition-all"><Utensils className="w-4 h-4" /><span>Zomato</span></a>
-              {selectedCafe.dineoutUrl && <a href={selectedCafe.dineoutUrl} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-[#56602E] hover:bg-[#414923] text-white text-xs font-semibold flex flex-col items-center justify-center gap-1 transition-all"><ShoppingBag className="w-4 h-4" /><span>Swiggy Dineout</span></a>}
+            <div className={`grid ${selectedCafe.dineoutUrl ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2 sm:grid-cols-3'} gap-2 pt-4 border-t border-[#E7B894]`}>
+              <a href={selectedCafe.mapsUrl} target="_blank" rel="noopener noreferrer" className="min-h-[48px] p-3 rounded-xl bg-[#7A2E12] hover:bg-[#64240E] text-[#FFF4E6] text-xs font-semibold flex flex-col items-center justify-center gap-1 transition-all"><MapPin className="w-4 h-4" /><span>Google Maps</span></a>
+              {selectedCafe.websiteUrl && <a href={selectedCafe.websiteUrl} target="_blank" rel="noopener noreferrer" className="min-h-[48px] p-3 rounded-xl bg-white/70 hover:bg-white border border-[#E7B894] text-[#7A2E12] text-xs font-semibold flex flex-col items-center justify-center gap-1 transition-all"><Globe className="w-4 h-4" /><span>Website</span></a>}
+              <a href={selectedCafe.zomatoUrl || `https://www.zomato.com/ncr/restaurants?q=${encodeURIComponent(selectedCafe.name)}`} target="_blank" rel="noopener noreferrer" className="min-h-[48px] p-3 rounded-xl bg-[#F47B3A] hover:bg-[#D9682D] text-white text-xs font-semibold flex flex-col items-center justify-center gap-1 transition-all"><Utensils className="w-4 h-4" /><span>Zomato</span></a>
+              {selectedCafe.dineoutUrl && <a href={selectedCafe.dineoutUrl} target="_blank" rel="noopener noreferrer" className="min-h-[48px] p-3 rounded-xl bg-[#C15A2C] hover:bg-[#A94C23] text-white text-xs font-semibold flex flex-col items-center justify-center gap-1 transition-all"><ShoppingBag className="w-4 h-4" /><span>Swiggy Dineout</span></a>}
             </div>
           </div>
         </div>
