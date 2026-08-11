@@ -84,7 +84,9 @@ The project uses public OpenStreetMap-based services:
 - **Overpass API** for finding mapped cafes, restaurants and fast-food places around those coordinates.
 - **Google Maps links** only for opening the place in Maps. The site does not call the paid Google Places API.
 
-Public OpenStreetMap services have fair-use and capacity limits. The app therefore uses bounded searches, a small result set, a short request path and a fallback curated dataset. If the project grows significantly, the discovery layer should move to a dedicated/self-hosted OSM/Overpass setup or a commercial POI provider.
+These public services are free to access but are **not an unlimited commercial API**. Their infrastructure is shared and subject to fair-use, capacity and policy limits. The app therefore keeps searches user-triggered, bounded to a maximum discovery radius, limits the result set, caches repeated requests for a short period and has a fallback curated dataset. If usage becomes significant, the correct next step is to move to a dedicated/self-hosted OSM/Overpass stack or a commercial POI provider rather than increasing load on public servers. See the [Overpass usage guidance](https://dev.overpass-api.de/overpass-doc/en/preface/commons.html) and [OpenStreetMap service policies](https://operations.osmfoundation.org/policies/).
+
+Place data is © OpenStreetMap contributors and available under the [ODbL](https://www.openstreetmap.org/copyright).
 
 ## OpenAI setup
 
@@ -151,6 +153,10 @@ delhi-cafe-hopping/
 The AI is **not the restaurant database**. OpenStreetMap supplies the discovered place facts. The AI only ranks and explains supplied candidates. The model is instructed not to invent current prices, offers, opening hours, reservation availability or restaurant facts.
 
 Likewise, the app does not create fake Swiggy Dineout links for dynamically discovered places. Dineout is shown only for curated venues where a verified URL is already stored.
+
+## CI
+
+GitHub Actions runs `npm install` and `npm run build` on pushes and pull requests to `main` so frontend build regressions are caught automatically.
 
 ## Curator
 
