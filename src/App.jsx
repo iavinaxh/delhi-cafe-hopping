@@ -40,7 +40,7 @@ export default function App() {
         <main className="pb-16 bg-[#CC3A63]">
           {activeTab === 'explore' && <CafeExplorer cafes={cafesData} searchQuery={searchQuery} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={(cafe) => setSelectedCafe(cafe)} />}
           {activeTab === 'quick' && <QuickDecisions cafes={cafesData} onSelectCafe={(cafe) => setSelectedCafe(cafe)} />}
-          {activeTab === 'plans' && <DatePlansSection cafes={cafesData} onSelectCafe={(cafe) => setSelectedCafe(cafe)} />}
+          {activeTab === 'plans' && <DatePlansSection />}
           {activeTab === 'metro' && <MetroGuideSection />}
         </main>
       </div>
@@ -57,7 +57,7 @@ export default function App() {
             <p className="text-xs sm:text-sm text-[#786C5C] italic mb-6">Best for: {selectedCafe.bestFor}</p>
             <div className="space-y-4 text-xs sm:text-sm text-[#4E453B] mb-8">
               {selectedCafe.whatToOrder && <div className="p-4 rounded-2xl bg-[#F9F0E0] border border-[#A2AB73]/30"><span className="text-[#CC3A63] font-bold uppercase tracking-wider text-xs block mb-1">Recommended Order</span><p>{selectedCafe.whatToOrder}</p></div>}
-              {selectedCafe.metroRoute && <div className="p-4 rounded-2xl bg-[#F9F0E0] border border-[#A2AB73]/30"><span className="text-[#68713D] font-bold uppercase tracking-wider text-xs block mb-1">Metro Route (From Paschim Vihar)</span><p>{selectedCafe.metroRoute}</p></div>}
+              {selectedCafe.metroRoute && <div className="p-4 rounded-2xl bg-[#F9F0E0] border border-[#A2AB73]/30"><span className="text-[#68713D] font-bold uppercase tracking-wider text-xs block mb-1">Getting There</span><p>{selectedCafe.metroRoute}</p></div>}
               {selectedCafe.afterFood && <div className="p-4 rounded-2xl bg-[#F9F0E0] border border-[#A2AB73]/30"><span className="text-[#68713D] font-bold uppercase tracking-wider text-xs block mb-1">Post-Meal Walk & Activity</span><p>{selectedCafe.afterFood}</p></div>}
               {selectedCafe.curatorTake && <div className="p-4 rounded-2xl bg-[#A2AB73]/15 border border-[#A2AB73]/35 italic text-[#56602E]"><strong className="not-italic text-[#CC3A63] block mb-1">Avinash's Take:</strong>"{selectedCafe.curatorTake}"</div>}
             </div>
