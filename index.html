@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Title & Meta -->
+    <title>Delhi NCR Cafe Hopping & Date Guide | Curated by @iavinaxh</title>
+    <meta name="description" content="Discover cozy, elegant & budget-friendly date destinations in Delhi NCR (CP, Rajouri Garden, Mandi House, Pacific Mall). Target budget ₹1,000 for 2 people with direct metro routes & dining offers." />
+    <meta name="keywords" content="Delhi NCR Cafes, Cafe Hopping Delhi, Date Spots Delhi, Paschim Vihar Date Guide, Budget Cafes CP, Rajouri Garden Cafes, @iavinaxh" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN for instant utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Playfair Display"', 'serif'],
+              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.97); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      .animate-fadeIn {
+        animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      /* Custom Scrollbars */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0c0a09;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #44403c;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #78716c;
+      }
+    </style>
+  </head>
+  <body class="bg-stone-950 text-stone-100 antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
