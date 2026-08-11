@@ -19,7 +19,7 @@ export default function CafeCard({ cafe, isWishlisted, onToggleWishlist, onSelec
       </div>
       <div className="p-5 space-y-3 text-xs sm:text-sm text-[#4E453B] flex-1">
         <div className="p-3.5 rounded-2xl bg-[#FFF7EB] border border-[#A2AB73]/25"><span className="text-[#CC3A63] font-bold flex items-center gap-1 mb-1"><Utensils className="w-3.5 h-3.5" /> WHAT TO ORDER</span><p>{cafe.whatToOrder}</p></div>
-        <div className="p-3.5 rounded-2xl bg-[#FFF7EB] border border-[#A2AB73]/25"><span className="text-[#68713D] font-bold flex items-center gap-1 mb-1"><Route className="w-3.5 h-3.5" /> FROM PASCHIM VIHAR</span><p>{cafe.metroRoute}</p></div>
+        <div className="p-3.5 rounded-2xl bg-[#FFF7EB] border border-[#A2AB73]/25"><span className="text-[#68713D] font-bold flex items-center gap-1 mb-1"><Route className="w-3.5 h-3.5" /> GETTING THERE</span><p>{cafe.metroRoute}</p></div>
         <div className="p-3.5 rounded-2xl bg-[#A2AB73]/15 border border-[#A2AB73]/35"><span className="text-[#56602E] font-bold block mb-1">REAL TALK</span><p>{cafe.curatorTake}</p></div>
       </div>
       <div className={`grid ${hasDineout ? 'grid-cols-4' : 'grid-cols-3'} gap-2 p-4 border-t border-[#A2AB73]/30 bg-[#F9F0E0]`}>
