@@ -1,36 +1,221 @@
-const GOOGLE_URL='https://places.googleapis.com/v1/places:searchText';
-const OPENAI_URL='https://api.openai.com/v1/chat/completions';
-const json=(res,status,body)=>{res.status(status).setHeader('Content-Type','application/json');res.end(JSON.stringify(body));};
-function budgetPriceLevels(budget){const b=Number(budget||1000);if(b<=700)return ['PRICE_LEVEL_INEXPENSIVE'];if(b<=1000)return ['PRICE_LEVEL_INEXPENSIVE','PRICE_LEVEL_MODERATE'];if(b<=2000)return ['PRICE_LEVEL_INEXPENSIVE','PRICE_LEVEL_MODERATE','PRICE_LEVEL_EXPENSIVE'];return ['PRICE_LEVEL_INEXPENSIVE','PRICE_LEVEL_MODERATE','PRICE_LEVEL_EXPENSIVE','PRICE_LEVEL_VERY_EXPENSIVE'];}
-function toCandidate(place,budget){return {id:place.id,name:place.displayName?.text||'Unnamed place',address:place.formattedAddress||'',rating:place.rating||null,userRatingCount:place.userRatingCount||null,types:place.types||[],primaryType:place.primaryType||null,mapsUrl:place.googleMapsUri||`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((place.displayName?.text||'')+' '+(place.formattedAddress||''))}`,budgetFilter:`Budget filter: ${Number(budget||1000)<=1000?'inexpensive/moderate':'matched to your selected range'}`};}
-async function googleSearch(apiKey,query,coords,radiusMeters,budget,pageSize=15){
-  const body={textQuery:query,languageCode:'en',regionCode:'IN',pageSize,rankPreference:'RELEVANCE',priceLevels:budgetPriceLevels(budget)};
-  if(coords?.lat&&coords?.lng&&radiusMeters<50000)body.locationBias={circle:{center:{latitude:Number(coords.lat),longitude:Number(coords.lng)},radius:radiusMeters}};
-  const response=await fetch(GOOGLE_URL,{method:'POST',headers:{'Content-Type':'application/json','X-Goog-Api-Key':apiKey,'X-Goog-FieldMask':'places.id,places.displayName,places.formattedAddress,places.location,places.rating,places.userRatingCount,places.googleMapsUri,places.types,places.primaryType'},body:JSON.stringify(body)});
-  const data=await response.json();if(!response.ok)throw new Error(data.error?.message||'Google Places search failed.');return data.places||[];
+const OVERPASS_URLS = [
+  'https://overpass-api.de/api/interpreter',
+  'https://overpass.kumi.systems/api/interpreter'
+];
+const PHOTON_URL = 'https://photon.komoot.io/api/';
+const OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
+
+const json = (res, status, body) => {
+  res.status(status).setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(body));
+};
+
+const clean = (value) => String(value || '').trim();
+const enc = (value) => encodeURIComponent(value);
+
+async function photonSearch(query) {
+  const url = `${PHOTON_URL}?q=${enc(query)}&limit=1&lang=en`;
+  const response = await fetch(url, {
+    headers: { 'Accept': 'application/json', 'User-Agent': 'DelhiNCRDateGuide/1.0' }
+  });
+  if (!response.ok) throw new Error('Location search is temporarily unavailable.');
+  const data = await response.json();
+  const feature = data.features?.[0];
+  if (!feature?.geometry?.coordinates?.length) throw new Error('Could not find that Delhi NCR location. Try a landmark, neighbourhood or metro station.');
+  return {
+    lng: Number(feature.geometry.coordinates[0]),
+    lat: Number(feature.geometry.coordinates[1]),
+    label: feature.properties?.name || query
+  };
 }
-function simpleRank(candidates,prefs){const vibe=String(prefs.vibe||'').toLowerCase(),cuisine=String(prefs.cuisine||'').toLowerCase(),occasion=String(prefs.occasion||'').toLowerCase();return candidates.map(p=>{const hay=`${p.name} ${p.address} ${(p.types||[]).join(' ')} ${p.primaryType||''}`.toLowerCase();let score=(p.rating||0)*10+Math.min(p.userRatingCount||0,1000)/2000;if(vibe!=='any vibe'&&hay.includes(vibe))score+=5;if(cuisine!=='any cuisine'&&hay.includes(cuisine.split(' ')[0]))score+=4;if(occasion==='date'&&(hay.includes('cafe')||hay.includes('restaurant')))score+=2;return {...p,_score:score};}).sort((a,b)=>b._score-a._score).slice(0,6).map((p,i)=>({...p,matchLabel:i===0?'Best overall match':i===1?'Best value candidate':i===2?'Best ambience candidate':'Strong match',reason:`Matches your ${prefs.occasion||'outing'} request in ${prefs.location==='Current location'?'your area':prefs.location||'Delhi NCR'} with a ${prefs.vibe||'flexible'} preference. Google rating: ${p.rating||'not available'}.`,caution:'Google price levels are a filter, not an exact bill for your group. Check the live menu before visiting.'}));}
-async function aiRank(apiKey,candidates,prefs){
-  const model=process.env.OPENAI_MODEL||'gpt-5-mini';
-  const system=`You are the recommendation layer for a Delhi NCR restaurant discovery website. Rank the supplied Google Places candidates against the user's preferences. NEVER invent a restaurant, rating, price, opening hour, offer, reservation availability, cuisine, menu item, or location detail that is not present in the supplied data. Google data is the source of truth for current place facts. The Google price filter is only a rough affordability filter, not an exact group bill. The user's budget is the total budget for the whole group. If exact cost cannot be established, say the user should verify the current menu. You may use general culinary knowledge to suggest what kind of order could fit, but label uncertain details as suggestions. Return only valid JSON.`;
-  const schema={type:'json_schema',json_schema:{name:'restaurant_recommendations',strict:true,schema:{type:'object',additionalProperties:false,properties:{recommendations:{type:'array',minItems:1,maxItems:6,items:{type:'object',additionalProperties:false,properties:{id:{type:'string'},matchLabel:{type:'string'},reason:{type:'string'},budgetFit:{type:'string'},vibeFit:{type:'string'},orderAdvice:{type:'string'},caution:{type:'string'}},required:['id','matchLabel','reason','budgetFit','vibeFit','orderAdvice','caution']}}},required:['recommendations']}}};
-  const response=await fetch(OPENAI_URL,{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${apiKey}`},body:JSON.stringify({model,temperature:0.2,response_format:schema,messages:[{role:'system',content:system},{role:'user',content:JSON.stringify({preferences:prefs,candidates})}]} )});
-  const data=await response.json();if(!response.ok)throw new Error(data.error?.message||'OpenAI recommendation request failed.');const content=data.choices?.[0]?.message?.content;if(!content)throw new Error('OpenAI returned no recommendation content.');return JSON.parse(content).recommendations;
+
+function escapeOverpass(value) {
+  return String(value).replace(/[\\"\n\r]/g, ' ').replace(/\s+/g, ' ').trim();
 }
-export default async function handler(req,res){
-  if(req.method!=='POST')return json(res,405,{error:'Use POST.'});
-  const googleKey=process.env.GOOGLE_PLACES_API_KEY;if(!googleKey)return json(res,503,{error:'Google Places is not configured yet. Add GOOGLE_PLACES_API_KEY in your Vercel environment variables.'});
-  try{
-    const prefs=typeof req.body==='string'?JSON.parse(req.body):(req.body||{}),rawLocation=String(prefs.location||'Delhi NCR').trim(),location=rawLocation.toLowerCase()==='current location'?'Delhi NCR':rawLocation;
-    const cuisine=String(prefs.cuisine||'Any cuisine'),occasion=String(prefs.occasion||'Casual meal'),vibe=String(prefs.vibe||'Any vibe'),requirements=String(prefs.requirements||'').trim();
-    const base=[cuisine!=='Any cuisine'?cuisine:'',vibe!=='Any vibe'?vibe:'',occasion!=='Casual meal'?occasion:'',requirements].filter(Boolean).join(' ');
-    const budget=Number(prefs.budget||1000),queries=[`${base} cafe restaurants in ${location} Delhi NCR`,`${base} best restaurants in ${location} Delhi NCR`];
-    const requestedDistance=Number(prefs.distance||5),radiusMeters=requestedDistance>=50?50000:requestedDistance*1000;
-    const batches=await Promise.all(queries.map(q=>googleSearch(googleKey,q,prefs.coords,radiusMeters,budget,15)));
-    const map=new Map();batches.flat().forEach(place=>{if(place?.id)map.set(place.id,place);});const candidates=Array.from(map.values()).map(p=>toCandidate(p,budget));
-    if(!candidates.length)return json(res,200,{source:'Google Places',results:[]});
-    const ranked=simpleRank(candidates,prefs);let results=ranked;
-    if(process.env.OPENAI_API_KEY){try{const ai=await aiRank(process.env.OPENAI_API_KEY,ranked,prefs),byId=new Map(ranked.map(p=>[p.id,p]));results=ai.map(item=>({...byId.get(item.id),...item})).filter(Boolean);}catch(aiError){console.error('AI ranking failed, using Google ranking:',aiError.message);}}
-    return json(res,200,{source:process.env.OPENAI_API_KEY?'Google Places + AI ranking':'Google Places',results});
-  }catch(error){console.error(error);return json(res,500,{error:error.message||'Recommendation service failed.'});}
+
+function buildOverpassQuery(lat, lng, radiusMeters, cuisine) {
+  const cuisinePart = cuisine && cuisine !== 'Any cuisine' ? escapeOverpass(cuisine).toLowerCase() : '';
+  const cuisineFilter = cuisinePart ? `[cuisine~"${cuisinePart}",i]` : '';
+  const around = `(around:${Math.min(Math.max(radiusMeters, 1000), 50000)},${lat},${lng})`;
+  return `[out:json][timeout:25];(
+    nwr[amenity=cafe]${cuisineFilter}${around};
+    nwr[amenity=restaurant]${cuisineFilter}${around};
+    nwr[amenity=fast_food]${cuisineFilter}${around};
+  );out center tags;`;
+}
+
+async function overpassSearch(query) {
+  let lastError = null;
+  for (const endpoint of OVERPASS_URLS) {
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          'User-Agent': 'DelhiNCRDateGuide/1.0'
+        },
+        body: `data=${enc(query)}`
+      });
+      if (!response.ok) {
+        lastError = new Error(`Overpass returned ${response.status}`);
+        continue;
+      }
+      return await response.json();
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError || new Error('Restaurant discovery is temporarily unavailable.');
+}
+
+function haversineKm(aLat, aLng, bLat, bLng) {
+  const r = 6371;
+  const dLat = (bLat - aLat) * Math.PI / 180;
+  const dLng = (bLng - aLng) * Math.PI / 180;
+  const x = Math.sin(dLat / 2) ** 2 + Math.cos(aLat * Math.PI / 180) * Math.cos(bLat * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+  return r * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+}
+
+function elementPoint(element) {
+  if (element.type === 'node') return { lat: Number(element.lat), lng: Number(element.lon) };
+  return { lat: Number(element.center?.lat), lng: Number(element.center?.lon) };
+}
+
+function mapsUrl(name, address, lat, lng) {
+  if (Number.isFinite(lat) && Number.isFinite(lng)) return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+  return `https://www.google.com/maps/search/?api=1&query=${enc(`${name} ${address}`)}`;
+}
+
+function toCandidate(element, origin, budget, people) {
+  const tags = element.tags || {};
+  const point = elementPoint(element);
+  const name = clean(tags.name || tags['name:en']);
+  if (!name || !Number.isFinite(point.lat) || !Number.isFinite(point.lng)) return null;
+  const street = [tags['addr:housenumber'], tags['addr:street']].filter(Boolean).join(' ');
+  const address = [street, tags['addr:suburb'], tags['addr:city'], tags['addr:postcode']].filter(Boolean).join(', ') || tags['addr:full'] || '';
+  const cuisine = clean(tags.cuisine).replace(/;/g, ', ');
+  const amenity = tags.amenity || 'restaurant';
+  const distanceKm = haversineKm(origin.lat, origin.lng, point.lat, point.lng);
+  const website = tags.website || tags['contact:website'] || '';
+  const phone = tags.phone || tags['contact:phone'] || '';
+  const outdoor = tags.outdoor_seating === 'yes';
+  const vegetarian = tags.diet_vegetarian === 'yes' || tags['diet:vegetarian'] === 'yes';
+  const vegan = tags.diet_vegan === 'yes' || tags['diet:vegan'] === 'yes';
+  const price = tags['price:range'] || tags.price_range || '';
+  return {
+    id: `${element.type}/${element.id}`,
+    name,
+    address,
+    cuisine: cuisine || 'Not listed',
+    amenity,
+    distanceKm: Number(distanceKm.toFixed(1)),
+    mapsUrl: mapsUrl(name, address, point.lat, point.lng),
+    websiteUrl: website,
+    phone,
+    openingHours: tags.opening_hours || '',
+    outdoor,
+    vegetarian,
+    vegan,
+    priceRange: price,
+    budgetLabel: price || 'Price not listed',
+    groupSize: people,
+    totalBudget: budget,
+    source: 'OpenStreetMap'
+  };
+}
+
+function simpleRank(candidates, prefs) {
+  const vibe = clean(prefs.vibe).toLowerCase();
+  const cuisine = clean(prefs.cuisine).toLowerCase();
+  const occasion = clean(prefs.occasion).toLowerCase();
+  const requirements = clean(prefs.requirements).toLowerCase();
+  return candidates.map((p) => {
+    const hay = `${p.name} ${p.address} ${p.cuisine} ${p.amenity} ${p.outdoor ? 'outdoor' : ''} ${p.vegetarian ? 'vegetarian' : ''} ${p.vegan ? 'vegan' : ''}`.toLowerCase();
+    let score = Math.max(0, 30 - p.distanceKm * 2);
+    if (cuisine !== 'any cuisine' && hay.includes(cuisine.split(' ')[0])) score += 12;
+    if (vibe !== 'any vibe') {
+      if (vibe === 'outdoor' && p.outdoor) score += 12;
+      else if (hay.includes(vibe)) score += 8;
+    }
+    if (requirements && hay.includes(requirements.split(/[, ]+/)[0])) score += 6;
+    if (occasion === 'date' && (p.amenity === 'cafe' || p.amenity === 'restaurant')) score += 3;
+    return { ...p, _score: score };
+  }).sort((a, b) => b._score - a._score).slice(0, 10).map((p, i) => ({
+    ...p,
+    matchLabel: i === 0 ? 'Best overall match' : i === 1 ? 'Best nearby option' : i === 2 ? 'Best vibe match' : 'Strong match',
+    reason: `${p.distanceKm} km away. ${p.cuisine !== 'Not listed' ? `Cuisine: ${p.cuisine}.` : 'Cuisine is not listed in OpenStreetMap.'}`,
+    caution: 'Live price, availability and dining offers are not guaranteed by OpenStreetMap. Check the venue before visiting.'
+  }))
+}
+
+async function aiRank(apiKey, candidates, prefs) {
+  const model = process.env.OPENAI_MODEL || 'gpt-5-mini';
+  const system = `You are the recommendation layer for a Delhi NCR restaurant discovery website. Rank only the supplied OpenStreetMap candidates against the user's preferences. NEVER invent a restaurant, rating, price, opening hour, offer, reservation availability, menu item, cuisine, or location detail. OpenStreetMap is the source of truth for supplied place facts. If a fact is missing, say it is missing. You may suggest a type of meal generically, but do not claim a specific menu item exists. The user's budget is total for the whole group and exact prices are usually unavailable. Return only valid JSON.`;
+  const schema = { type: 'json_schema', json_schema: { name: 'restaurant_recommendations', strict: true, schema: { type: 'object', additionalProperties: false, properties: { recommendations: { type: 'array', minItems: 1, maxItems: 6, items: { type: 'object', additionalProperties: false, properties: { id: { type: 'string' }, matchLabel: { type: 'string' }, reason: { type: 'string' }, budgetFit: { type: 'string' }, vibeFit: { type: 'string' }, orderAdvice: { type: 'string' }, caution: { type: 'string' } }, required: ['id', 'matchLabel', 'reason', 'budgetFit', 'vibeFit', 'orderAdvice', 'caution'] } } }, required: ['recommendations'] } } };
+  const response = await fetch(OPENAI_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+    body: JSON.stringify({ model, temperature: 0.2, response_format: schema, messages: [{ role: 'system', content: system }, { role: 'user', content: JSON.stringify({ preferences: prefs, candidates }) }] })
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error?.message || 'OpenAI recommendation request failed.');
+  const content = data.choices?.[0]?.message?.content;
+  if (!content) throw new Error('OpenAI returned no recommendation content.');
+  return JSON.parse(content).recommendations;
+}
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') return json(res, 405, { error: 'Use POST.' });
+  try {
+    const prefs = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
+    const rawLocation = clean(prefs.location);
+    const budget = Number(prefs.budget || 1000);
+    const people = Number(prefs.people || 2);
+    const distance = Number(prefs.distance || 5);
+    const cuisine = clean(prefs.cuisine) || 'Any cuisine';
+    const searchLocation = rawLocation && rawLocation.toLowerCase() !== 'current location' ? rawLocation : '';
+    let origin;
+    let locationLabel = 'Delhi NCR';
+    if (searchLocation) {
+      origin = await photonSearch(`${searchLocation}, Delhi NCR, India`);
+      locationLabel = origin.label;
+    } else if (prefs.coords?.lat && prefs.coords?.lng) {
+      origin = { lat: Number(prefs.coords.lat), lng: Number(prefs.coords.lng), label: 'your current location' };
+      locationLabel = 'your current location';
+    } else {
+      origin = await photonSearch('Connaught Place, New Delhi, India');
+      locationLabel = 'Delhi NCR';
+    }
+
+    const radiusMeters = distance >= 50 ? 50000 : Math.max(1000, distance * 1000);
+    const query = buildOverpassQuery(origin.lat, origin.lng, radiusMeters, cuisine);
+    const data = await overpassSearch(query);
+    const seen = new Set();
+    const candidates = (data.elements || []).map((element) => toCandidate(element, origin, budget, people)).filter(Boolean).filter((place) => {
+      const key = place.name.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return place.distanceKm <= (distance >= 50 ? 50 : distance);
+    });
+
+    if (!candidates.length) return json(res, 200, { source: 'OpenStreetMap', location: locationLabel, results: [], message: 'No mapped cafes/restaurants matched this area. Try a nearby landmark or increase the travel distance.' });
+
+    const ranked = simpleRank(candidates, prefs);
+    let results = ranked;
+    let source = 'OpenStreetMap';
+    if (process.env.OPENAI_API_KEY) {
+      try {
+        const ai = await aiRank(process.env.OPENAI_API_KEY, ranked, prefs);
+        const byId = new Map(ranked.map((p) => [p.id, p]));
+        results = ai.map((item) => ({ ...byId.get(item.id), ...item })).filter(Boolean);
+        source = 'OpenStreetMap + AI ranking';
+      } catch (error) {
+        console.error('AI ranking failed, using local ranking:', error.message);
+      }
+    }
+    return json(res, 200, { source, location: locationLabel, results });
+  } catch (error) {
+    console.error('Recommendation service failed:', error);
+    return json(res, 500, { error: error.message || 'Restaurant discovery failed. Please try another location.' });
+  }
 }
