@@ -1,8 +1,8 @@
 import React from 'react';
-import { Coffee, QrCode, Heart, Linkedin } from 'lucide-react';
+import { Coffee, QrCode, Heart, Linkedin, Mail } from 'lucide-react';
 import InstagramIcon from './InstagramIcon';
 
-export default function Footer({ onOpenInstaModal }) {
+export default function Footer({ onOpenInstaModal, onOpenContact }) {
   return <footer className="bg-[#FCE6D0] border-t border-[#E7B894] text-[#6D5143] py-12">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-[#E7B894]">
@@ -17,6 +17,7 @@ export default function Footer({ onOpenInstaModal }) {
             <div className="flex flex-wrap gap-2">
               <button type="button" onClick={onOpenInstaModal} className="min-h-11 px-3.5 py-2 rounded-xl bg-[#CC3A63] text-white font-semibold text-xs inline-flex items-center justify-center gap-2 hover:bg-[#B52F55] transition-all"><InstagramIcon className="w-4 h-4"/><span>@iavinaxh</span><QrCode className="w-3.5 h-3.5 opacity-80"/></button>
               <a href="https://www.linkedin.com/in/avinash-singh-232522254/" target="_blank" rel="noopener noreferrer" aria-label="Avinash Singh on LinkedIn" className="min-h-11 px-3.5 py-2 rounded-xl bg-[#FFF4E6] border border-[#E7B894] text-[#7A2E12] font-semibold text-xs inline-flex items-center justify-center gap-2 hover:border-[#CC3A63] hover:text-[#CC3A63] transition-all"><Linkedin className="w-4 h-4"/><span>LinkedIn</span></a>
+              <button type="button" onClick={onOpenContact} className="min-h-11 px-3.5 py-2 rounded-xl bg-[#FFF4E6] border border-[#E7B894] text-[#7A2E12] font-semibold text-xs inline-flex items-center justify-center gap-2 hover:border-[#CC3A63] hover:text-[#CC3A63] transition-all"><Mail className="w-4 h-4"/><span>Contact</span></button>
             </div>
           </div>
         </div>
