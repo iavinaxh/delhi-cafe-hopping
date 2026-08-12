@@ -15,6 +15,10 @@ import { PREMIUM_CAFES } from './data/premiumCafes';
 import { MapPin, Utensils, Globe, X, ShoppingBag } from 'lucide-react';
 
 const allCafes = [...cafesData, ...PREMIUM_CAFES];
+// RecommendationPlanner already has its own ranking logic. Feed it a neutral catalogue order
+// so legacy `isTopPick` flags cannot overpower the user's selected budget/location/vibe.
+// Premium venues are placed first only to break genuine score ties in favour of catalogue coverage.
+const recommendationCafes = [...PREMIUM_CAFES, ...cafesData].map(cafe => ({ ...cafe, isTopPick: false }));
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -79,7 +83,7 @@ export default function App() {
         <Navbar wishlistCount={wishlist.length} onOpenWishlist={() => setIsWishlistOpen(true)} onOpenInstaModal={() => setIsInstaModalOpen(true)} activeTab={activeTab} setActiveTab={setActiveTab} onOpenContact={openContactPage} onGoHome={goHome} />
         <Hero searchQuery={searchQuery} setSearchQuery={(q) => { setSearchQuery(q); if (activeTab !== 'explore') setActiveTab('explore'); }} onOpenInstaModal={() => setIsInstaModalOpen(true)} setActiveTab={setActiveTab} />
         <main className="bg-[#F47B3A] pb-16 site-main">
-          <RecommendationPlanner cafes={allCafes} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={setSelectedCafe} />
+          <RecommendationPlanner cafes={recommendationCafes} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={setSelectedCafe} />
           {activeTab === 'explore' && <div id="section-explore" className="scroll-mt-24"><CafeExplorer cafes={allCafes} searchQuery={searchQuery} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={(cafe) => setSelectedCafe(cafe)} /></div>}
           {activeTab === 'quick' && <div id="section-quick" className="scroll-mt-24"><QuickDecisions cafes={allCafes} onSelectCafe={(cafe) => setSelectedCafe(cafe)} /></div>}
           {activeTab === 'plans' && <div id="section-plans" className="scroll-mt-24"><DatePlansSection /></div>}
