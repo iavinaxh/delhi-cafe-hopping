@@ -53,13 +53,19 @@ export default function App() {
 
   const toggleWishlist = (cafeId) => setWishlist(prev => prev.includes(cafeId) ? prev.filter(id => id !== cafeId) : [...prev, cafeId]);
 
+  const navigateHomeSection = (tab) => {
+    setActiveTab(tab);
+    goHome();
+  };
+
   if (isContactPage) {
     return (
       <div className="min-h-screen bg-[#F47B3A] text-[#3A1F14] font-sans flex flex-col">
-        <Navbar wishlistCount={wishlist.length} onOpenWishlist={() => setIsWishlistOpen(true)} onOpenInstaModal={() => setIsInstaModalOpen(true)} activeTab="contact" setActiveTab={() => {}} />
+        <Navbar wishlistCount={wishlist.length} onOpenWishlist={() => setIsWishlistOpen(true)} onOpenInstaModal={() => setIsInstaModalOpen(true)} activeTab="contact" setActiveTab={navigateHomeSection} onOpenContact={openContactPage} onGoHome={goHome} />
         <ContactPage />
-        <Footer onOpenInstaModal={() => setIsInstaModalOpen(true)} />
+        <Footer onOpenInstaModal={() => setIsInstaModalOpen(true)} onOpenContact={openContactPage} />
         <InstaModal isOpen={isInstaModalOpen} onClose={() => setIsInstaModalOpen(false)} />
+        <WishlistDrawer isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlist={wishlist} cafes={cafesData} onToggleWishlist={toggleWishlist} onSelectCafe={() => {}} />
       </div>
     );
   }
