@@ -1,8 +1,12 @@
 import React from 'react';
-import { ArrowLeft, Mail, Instagram, Coffee } from 'lucide-react';
+import { ArrowLeft, Mail, Coffee } from 'lucide-react';
 
 function LinkedInIcon({ className = 'w-5 h-5' }) {
   return <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.68H9.34V8.99h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.28ZM5.32 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM3.54 20.45H7.1V8.99H3.54v11.46Z" /></svg>;
+}
+
+function InstagramIcon({ className = 'w-5 h-5' }) {
+  return <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5" /><circle cx="12" cy="12" r="4.1" /><circle cx="17.6" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>;
 }
 
 export default function ContactPage() {
@@ -28,7 +32,7 @@ export default function ContactPage() {
                 <span><span className="block text-xs uppercase tracking-wider font-bold text-[#CC3A63]">LinkedIn</span><span className="block text-sm sm:text-base font-semibold text-[#3A1F14]">Avinash Singh</span></span>
               </a>
               <a href="https://instagram.com/iavinaxh" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 rounded-2xl bg-[#FCE6D0] border border-[#E7B894] p-4 hover:border-[#CC3A63] transition-all">
-                <span className="w-11 h-11 rounded-xl bg-[#CC3A63] text-white flex items-center justify-center shrink-0"><Instagram className="w-5 h-5" /></span>
+                <span className="w-11 h-11 rounded-xl bg-[#CC3A63] text-white flex items-center justify-center shrink-0"><InstagramIcon className="w-5 h-5" /></span>
                 <span><span className="block text-xs uppercase tracking-wider font-bold text-[#CC3A63]">Instagram</span><span className="block text-sm sm:text-base font-semibold text-[#3A1F14]">@iavinaxh</span></span>
               </a>
             </div>
