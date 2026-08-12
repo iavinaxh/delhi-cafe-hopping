@@ -6,6 +6,7 @@ import QuickDecisions from './components/QuickDecisions';
 import CafeExplorer from './components/CafeExplorer';
 import DatePlansSection from './components/DatePlansSection';
 import MetroGuideSection from './components/MetroGuideSection';
+import ContactPage from './components/ContactPage';
 import InstaModal from './components/InstaModal';
 import WishlistDrawer from './components/WishlistDrawer';
 import Footer from './components/Footer';
@@ -18,6 +19,25 @@ export default function App() {
   const [isInstaModalOpen, setIsInstaModalOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [selectedCafe, setSelectedCafe] = useState(null);
+  const [isContactPage, setIsContactPage] = useState(() => window.location.pathname === '/contact');
+
+  useEffect(() => {
+    const handlePopState = () => setIsContactPage(window.location.pathname === '/contact');
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const openContactPage = () => {
+    window.history.pushState({}, '', '/contact');
+    setIsContactPage(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const goHome = () => {
+    if (window.location.pathname !== '/') window.history.pushState({}, '', '/');
+    setIsContactPage(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const [wishlist, setWishlist] = useState(() => {
     try {
@@ -33,10 +53,21 @@ export default function App() {
 
   const toggleWishlist = (cafeId) => setWishlist(prev => prev.includes(cafeId) ? prev.filter(id => id !== cafeId) : [...prev, cafeId]);
 
+  if (isContactPage) {
+    return (
+      <div className="min-h-screen bg-[#F47B3A] text-[#3A1F14] font-sans flex flex-col">
+        <Navbar wishlistCount={wishlist.length} onOpenWishlist={() => setIsWishlistOpen(true)} onOpenInstaModal={() => setIsInstaModalOpen(true)} activeTab="contact" setActiveTab={() => {}} />
+        <ContactPage />
+        <Footer onOpenInstaModal={() => setIsInstaModalOpen(true)} />
+        <InstaModal isOpen={isInstaModalOpen} onClose={() => setIsInstaModalOpen(false)} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#F47B3A] text-[#3A1F14] font-sans flex flex-col justify-between site-shell">
       <div>
-        <Navbar wishlistCount={wishlist.length} onOpenWishlist={() => setIsWishlistOpen(true)} onOpenInstaModal={() => setIsInstaModalOpen(true)} activeTab={activeTab} setActiveTab={setActiveTab} />
+        <Navbar wishlistCount={wishlist.length} onOpenWishlist={() => setIsWishlistOpen(true)} onOpenInstaModal={() => setIsInstaModalOpen(true)} activeTab={activeTab} setActiveTab={setActiveTab} onOpenContact={openContactPage} onGoHome={goHome} />
         <Hero searchQuery={searchQuery} setSearchQuery={(q) => { setSearchQuery(q); if (activeTab !== 'explore') setActiveTab('explore'); }} onOpenInstaModal={() => setIsInstaModalOpen(true)} setActiveTab={setActiveTab} />
         <main className="bg-[#F47B3A] pb-16 site-main">
           <RecommendationPlanner cafes={cafesData} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={setSelectedCafe} />
@@ -46,7 +77,7 @@ export default function App() {
           {activeTab === 'metro' && <div id="section-metro" className="scroll-mt-24"><MetroGuideSection /></div>}
         </main>
       </div>
-      <Footer onOpenInstaModal={() => setIsInstaModalOpen(true)} />
+      <Footer onOpenInstaModal={() => setIsInstaModalOpen(true)} onOpenContact={openContactPage} />
       <InstaModal isOpen={isInstaModalOpen} onClose={() => setIsInstaModalOpen(false)} />
       <WishlistDrawer isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlist={wishlist} cafes={cafesData} onToggleWishlist={toggleWishlist} onSelectCafe={(cafe) => setSelectedCafe(cafe)} />
 
