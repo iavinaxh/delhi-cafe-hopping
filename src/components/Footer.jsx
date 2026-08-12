@@ -1,6 +1,10 @@
 import React from 'react';
-import { Coffee, QrCode, Heart, Linkedin, Mail } from 'lucide-react';
+import { Coffee, QrCode, Heart, Mail } from 'lucide-react';
 import InstagramIcon from './InstagramIcon';
+
+function LinkedInIcon({ className = 'w-4 h-4' }) {
+  return <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.68H9.34V8.99h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.28ZM5.32 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM3.54 20.45H7.1V8.99H3.54v11.46Z" /></svg>;
+}
 
 export default function Footer({ onOpenInstaModal, onOpenContact }) {
   return <footer className="bg-[#FCE6D0] border-t border-[#E7B894] text-[#6D5143] py-12">
@@ -16,7 +20,7 @@ export default function Footer({ onOpenInstaModal, onOpenContact }) {
             <p className="text-[#4E382E]">Curated by <strong className="text-[#7A2E12]">Avinash</strong></p>
             <div className="flex flex-wrap gap-2">
               <button type="button" onClick={onOpenInstaModal} className="min-h-11 px-3.5 py-2 rounded-xl bg-[#CC3A63] text-white font-semibold text-xs inline-flex items-center justify-center gap-2 hover:bg-[#B52F55] transition-all"><InstagramIcon className="w-4 h-4"/><span>@iavinaxh</span><QrCode className="w-3.5 h-3.5 opacity-80"/></button>
-              <a href="https://www.linkedin.com/in/avinash-singh-232522254/" target="_blank" rel="noopener noreferrer" aria-label="Avinash Singh on LinkedIn" className="min-h-11 px-3.5 py-2 rounded-xl bg-[#FFF4E6] border border-[#E7B894] text-[#7A2E12] font-semibold text-xs inline-flex items-center justify-center gap-2 hover:border-[#CC3A63] hover:text-[#CC3A63] transition-all"><Linkedin className="w-4 h-4"/><span>LinkedIn</span></a>
+              <a href="https://www.linkedin.com/in/avinash-singh-232522254/" target="_blank" rel="noopener noreferrer" aria-label="Avinash Singh on LinkedIn" className="min-h-11 px-3.5 py-2 rounded-xl bg-[#FFF4E6] border border-[#E7B894] text-[#7A2E12] font-semibold text-xs inline-flex items-center justify-center gap-2 hover:border-[#CC3A63] hover:text-[#CC3A63] transition-all"><LinkedInIcon/><span>LinkedIn</span></a>
               <button type="button" onClick={onOpenContact} className="min-h-11 px-3.5 py-2 rounded-xl bg-[#FFF4E6] border border-[#E7B894] text-[#7A2E12] font-semibold text-xs inline-flex items-center justify-center gap-2 hover:border-[#CC3A63] hover:text-[#CC3A63] transition-all"><Mail className="w-4 h-4"/><span>Contact</span></button>
             </div>
           </div>
