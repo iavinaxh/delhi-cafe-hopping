@@ -1,25 +1,31 @@
 import React from 'react';
-import { Search, Sparkles, MapPin, Compass, ShieldCheck, SlidersHorizontal } from 'lucide-react';
+import { Search, Sparkles, MapPin, Compass, ShieldCheck, SlidersHorizontal, Bike, Utensils } from 'lucide-react';
 import InstagramIcon from './InstagramIcon';
 
 function EatingCouple() {
   return (
-    <div className="date-dinner-motion w-[96px] sm:w-[112px] h-[52px] sm:h-[58px] shrink-0 rounded-2xl bg-[#FFF4E6] border border-[#E7B894] flex items-center justify-center shadow-sm" aria-hidden="true">
-      <svg viewBox="0 0 120 64" className="w-full h-full" fill="none">
-        <g className="date-dinner-people">
-          <circle cx="42" cy="17" r="6" fill="#3A1F14" />
-          <path d="M34 29 Q42 23 50 29 L53 39 H31 Z" fill="#7A2E12" />
-          <circle cx="78" cy="17" r="6" fill="#CC3A63" />
-          <path d="M70 29 Q78 23 86 29 L89 39 H67 Z" fill="#CC3A63" />
-        </g>
-        <path d="M24 41 H96" stroke="#7A2E12" strokeWidth="3" strokeLinecap="round" />
-        <path d="M31 44 V56 M89 44 V56" stroke="#7A2E12" strokeWidth="2.5" strokeLinecap="round" />
-        <ellipse cx="60" cy="40" rx="14" ry="4" fill="#E7B894" />
-        <path d="M51 38 Q55 32 60 38 Q65 32 69 38" stroke="#CC3A63" strokeWidth="2" strokeLinecap="round" />
-        <path className="food-steam" d="M57 29 Q54 25 57 21 M64 29 Q67 25 64 21" stroke="#CC3A63" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="47" cy="38" r="2" fill="#3A1F14" />
-        <circle cx="73" cy="38" r="2" fill="#3A1F14" />
-      </svg>
+    <div className="date-dinner-sticker" aria-hidden="true">
+      <div className="date-dinner-art">
+        <span className="date-dinner-head head-one" />
+        <span className="date-dinner-head head-two" />
+        <span className="date-dinner-body body-one" />
+        <span className="date-dinner-body body-two" />
+        <span className="date-dinner-table" />
+        <span className="date-dinner-plate" />
+        <span className="food-steam steam-one" />
+        <span className="food-steam steam-two" />
+      </div>
+    </div>
+  );
+}
+
+function FoodDeliverySticker() {
+  return (
+    <div className="food-delivery-sticker" aria-hidden="true">
+      <Bike className="food-delivery-bike" />
+      <span className="food-bag"><Utensils /></span>
+      <span className="delivery-spark spark-one">✦</span>
+      <span className="delivery-spark spark-two">•</span>
     </div>
   );
 }
@@ -30,13 +36,16 @@ export default function Hero({ searchQuery, setSearchQuery, onOpenInstaModal, se
   return (
     <div className="relative overflow-hidden bg-[#FFF4E6] text-[#3A1F14] py-14 sm:py-24 border-b border-[#E7B894]">
       <style>{`
-        .date-dinner-people { animation: dinner-bob 2.8s ease-in-out infinite; transform-origin: 60px 30px; }
-        .food-steam { animation: food-steam 2.2s ease-in-out infinite; opacity: .65; }
-        @keyframes dinner-bob { 0%,100% { transform: translateY(1px); } 50% { transform: translateY(-2px); } }
-        @keyframes food-steam { 0%,100% { opacity: .2; transform: translateY(2px); } 50% { opacity: .8; transform: translateY(-2px); } }
-        @media (prefers-reduced-motion: reduce) {
-          .date-dinner-people, .food-steam { animation: none !important; }
-        }
+        .date-dinner-art { animation: dinner-bob 2.8s ease-in-out infinite; }
+        .food-steam { animation: food-steam 2.2s ease-in-out infinite; opacity: .45; }
+        .food-delivery-sticker { animation: delivery-float 3.2s ease-in-out infinite; }
+        .delivery-spark { animation: spark-pop 2.4s ease-in-out infinite; }
+        .spark-two { animation-delay: .7s; }
+        @keyframes dinner-bob { 0%,100% { transform: translateY(1px) rotate(-1deg); } 50% { transform: translateY(-3px) rotate(1deg); } }
+        @keyframes food-steam { 0%,100% { opacity: .15; transform: translateY(2px); } 50% { opacity: .8; transform: translateY(-3px); } }
+        @keyframes delivery-float { 0%,100% { transform: translateY(1px) rotate(-1deg); } 50% { transform: translateY(-4px) rotate(1deg); } }
+        @keyframes spark-pop { 0%,100% { opacity: .2; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.15); } }
+        @media (prefers-reduced-motion: reduce) { .date-dinner-art,.food-steam,.food-delivery-sticker,.delivery-spark { animation: none !important; } }
       `}</style>
       <div className="absolute -top-32 right-[-10%] w-[560px] h-[560px] bg-[#CC3A63]/10 blur-3xl rounded-full pointer-events-none"></div>
       <div className="absolute bottom-[-35%] left-[-8%] w-[460px] h-[460px] bg-[#7A2E12]/8 blur-3xl rounded-full pointer-events-none"></div>
@@ -53,12 +62,12 @@ export default function Hero({ searchQuery, setSearchQuery, onOpenInstaModal, se
             <div className="relative rounded-[34px] bg-[#7A2E12] p-3 shadow-[0_28px_70px_rgba(89,37,15,0.22)] rotate-1">
               <div className="rounded-[26px] bg-[#FCE6D0] min-h-[310px] sm:min-h-[380px] p-6 sm:p-8 flex flex-col justify-between border border-[#E7B894]">
                 <div><p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#CC3A63]">Start here</p><h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#3A1F14] mt-2">Where should we eat?</h2><p className="text-sm text-[#725344] mt-3">Pick an area, set your budget and tell us who you're with.</p></div>
-                <div className="space-y-3"><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><MapPin className="w-5 h-5 text-[#CC3A63]"/><span className="text-sm font-semibold text-[#5A3C2D]">Connaught Place</span></div><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><span className="w-5 h-5 rounded-full bg-[#CC3A63]/15 text-[#CC3A63] flex items-center justify-center text-xs font-bold">₹</span><span className="text-sm font-semibold text-[#5A3C2D]">₹1,000 • 2 people</span></div><div className="flex items-center gap-2"><div className="flex-1 rounded-2xl bg-[#CC3A63] text-white px-4 py-3 flex items-center justify-center gap-2 font-bold text-sm"><Search className="w-4 h-4"/>Show me the best matches</div><EatingCouple /></div></div>
+                <div className="space-y-3"><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><MapPin className="w-5 h-5 text-[#CC3A63]"/><span className="text-sm font-semibold text-[#5A3C2D]">Connaught Place</span></div><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><span className="w-5 h-5 rounded-full bg-[#CC3A63]/15 text-[#CC3A63] flex items-center justify-center text-xs font-bold">₹</span><span className="text-sm font-semibold text-[#5A3C2D]">₹1,000 • 2 people</span></div><div className="hero-search-row"><div className="hero-search-button flex-1 rounded-2xl bg-[#CC3A63] text-white px-4 py-3 flex items-center justify-center gap-2 font-bold text-sm"><Search className="w-4 h-4"/>Show me the best matches</div><EatingCouple /></div></div>
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-10 max-w-3xl"><div className="relative flex items-center"><Search className="absolute left-4 w-5 h-5 text-[#CC3A63] pointer-events-none"/><input type="text" value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} placeholder="Browse by cafe, restaurant, area or vibe..." className="w-full pl-12 pr-10 py-4 rounded-2xl bg-white/80 border border-[#E7B894] text-[#3A1F14] placeholder-[#A4816E] focus:outline-none focus:ring-2 focus:ring-[#CC3A63]/30 focus:border-[#CC3A63] text-sm sm:text-base shadow-[0_8px_24px_rgba(78,43,25,0.08)]"/>{searchQuery&&<button onClick={()=>setSearchQuery('')} className="absolute right-4 text-xs font-semibold text-[#7A2E12] bg-[#FCE6D0] px-2 py-1 rounded-lg">Clear</button>}</div></div>
+        <div className="hero-support-row mt-10 max-w-3xl"><div className="hero-support-search"><Search className="absolute left-4 w-5 h-5 text-[#CC3A63] pointer-events-none"/><input type="text" value={searchQuery} onChange={(e)=>setSearchQuery(e.target.value)} placeholder="Browse by cafe, restaurant, area or vibe..." className="w-full pl-12 pr-10 py-4 rounded-2xl bg-white/80 border border-[#E7B894] text-[#3A1F14] placeholder-[#A4816E] focus:outline-none focus:ring-2 focus:ring-[#CC3A63]/30 focus:border-[#CC3A63] text-sm sm:text-base shadow-[0_8px_24px_rgba(78,43,25,0.08)]"/>{searchQuery&&<button onClick={()=>setSearchQuery('')} className="absolute right-4 text-xs font-semibold text-[#7A2E12] bg-[#FCE6D0] px-2 py-1 rounded-lg">Clear</button>}</div><FoodDeliverySticker /></div>
       </div>
     </div>
   );
