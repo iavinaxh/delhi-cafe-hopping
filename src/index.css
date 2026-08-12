@@ -122,6 +122,34 @@ section { scroll-margin-top: 88px; }
     grid-row: 1;
   }
 
+  /* Keep all first-row dropdown controls on exactly the same horizontal line. */
+  #find-my-place form > div > label:nth-child(-n+3) > .relative {
+    margin-top: 8px !important;
+  }
+
+  /* The Where control has an extra vertical offset in the component. Normalize only that control. */
+  #find-my-place form > div > label:nth-child(1) > .relative {
+    transform: translateY(-19px);
+  }
+
+  /* Add a location pin inside the Where dropdown without changing component behavior. */
+  #find-my-place form > div > label:nth-child(1) > .relative::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    left: 13px;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%237A2E12' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
+  }
+
+  #find-my-place form > div > label:nth-child(1) select {
+    padding-left: 40px !important;
+  }
+
   /* Row 2: Find My Places 66.67% | Vibe 33.33% */
   #find-my-place form > div > div:nth-child(4) {
     grid-column: 1 / span 8;
