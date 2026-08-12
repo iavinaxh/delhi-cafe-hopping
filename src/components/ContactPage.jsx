@@ -1,5 +1,9 @@
 import React from 'react';
-import { ArrowLeft, Mail, Linkedin, Instagram, Coffee } from 'lucide-react';
+import { ArrowLeft, Mail, Instagram, Coffee } from 'lucide-react';
+
+function LinkedInIcon({ className = 'w-5 h-5' }) {
+  return <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.68H9.34V8.99h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.28ZM5.32 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM3.54 20.45H7.1V8.99H3.54v11.46Z" /></svg>;
+}
 
 export default function ContactPage() {
   return (
@@ -20,7 +24,7 @@ export default function ContactPage() {
                 <span className="min-w-0"><span className="block text-xs uppercase tracking-wider font-bold text-[#CC3A63]">Email</span><span className="block text-sm sm:text-base font-semibold text-[#3A1F14] break-all">avisingh21122003@gmail.com</span></span>
               </a>
               <a href="https://www.linkedin.com/in/avinash-singh-232522254/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 rounded-2xl bg-[#FCE6D0] border border-[#E7B894] p-4 hover:border-[#CC3A63] transition-all">
-                <span className="w-11 h-11 rounded-xl bg-[#7A2E12] text-[#FFF4E6] flex items-center justify-center shrink-0"><Linkedin className="w-5 h-5" /></span>
+                <span className="w-11 h-11 rounded-xl bg-[#7A2E12] text-[#FFF4E6] flex items-center justify-center shrink-0"><LinkedInIcon /></span>
                 <span><span className="block text-xs uppercase tracking-wider font-bold text-[#CC3A63]">LinkedIn</span><span className="block text-sm sm:text-base font-semibold text-[#3A1F14]">Avinash Singh</span></span>
               </a>
               <a href="https://instagram.com/iavinaxh" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 rounded-2xl bg-[#FCE6D0] border border-[#E7B894] p-4 hover:border-[#CC3A63] transition-all">
