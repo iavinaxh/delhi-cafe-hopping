@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <script>
       tailwind.config = {
         darkMode: 'class',
@@ -37,7 +38,49 @@
       ::-webkit-scrollbar-thumb:hover { background:#8F995F; }
       @keyframes fadeIn { from{opacity:0;transform:translateY(8px) scale(.985)} to{opacity:1;transform:translateY(0) scale(1)} }
       .animate-fadeIn { animation:fadeIn .28s ease-out forwards; }
+      .location-lottie-slot { display:inline-flex; width:22px; height:22px; flex:0 0 22px; align-items:center; justify-content:center; overflow:hidden; vertical-align:middle; pointer-events:none; }
+      .location-lottie-slot > svg { width:100% !important; height:100% !important; }
+      .planner-location-lottie { width:20px; height:20px; flex-basis:20px; }
+      .metro-location-lottie { width:24px; height:24px; flex-basis:24px; }
+      @media (max-width:640px) {
+        .planner-location-lottie { width:19px; height:19px; flex-basis:19px; }
+        .metro-location-lottie { width:22px; height:22px; flex-basis:22px; }
+      }
     </style>
+    <script>
+      (function () {
+        const animationPath = '/animations/food-delivery-location.json';
+        const mounted = new WeakSet();
+        function mountAnimation(target, className) {
+          if (!target || mounted.has(target) || !window.lottie) return;
+          mounted.add(target);
+          const slot = document.createElement('span');
+          slot.className = 'location-lottie-slot ' + className;
+          slot.setAttribute('aria-hidden', 'true');
+          target.replaceWith(slot);
+          window.lottie.loadAnimation({ container: slot, renderer: 'svg', loop: true, autoplay: true, path: animationPath, rendererSettings: { progressiveLoad: true, preserveAspectRatio: 'xMidYMid meet' } });
+        }
+        function decorate() {
+          document.querySelectorAll('#find-my-place label').forEach(function (label) {
+            const title = label.querySelector('span');
+            const select = label.querySelector('select');
+            if (!title || !select || title.textContent.trim().toLowerCase() !== 'where?') return;
+            const icon = select.parentElement && select.parentElement.querySelector('svg.lucide-map-pin');
+            if (icon) mountAnimation(icon, 'planner-location-lottie');
+          });
+          document.querySelectorAll('section').forEach(function (section) {
+            const heading = section.querySelector('h2');
+            if (!heading || heading.textContent.trim() !== 'Metro Route Cheat Sheet') return;
+            section.querySelectorAll('svg.lucide-train-front').forEach(function (icon) { mountAnimation(icon, 'metro-location-lottie'); });
+          });
+        }
+        function start() {
+          decorate();
+          new MutationObserver(decorate).observe(document.body, { childList: true, subtree: true });
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+      })();
+    </script>
   </head>
   <body class="bg-[#FFF7EB] text-[#241F1A] antialiased">
     <div id="root"></div>
