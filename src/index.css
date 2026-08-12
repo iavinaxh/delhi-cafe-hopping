@@ -99,6 +99,28 @@ section { scroll-margin-top: 88px; }
 .spark-one { right: 8%; bottom: 13%; }
 .spark-two { left: 12%; top: 12%; }
 
+/* Desktop finder layout: keep Vibe, budget plan and Find My Places on one clean row. */
+@media (min-width: 1024px) {
+  #find-my-place form > div {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  #find-my-place form > div > label:nth-child(4) {
+    grid-column: 1;
+  }
+
+  #find-my-place form > div > div:nth-child(5) {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+  }
+
+  #find-my-place form > div > div:nth-child(6) {
+    grid-column: 4;
+    grid-row: 2;
+    align-self: center;
+  }
+}
+
 @media (max-width: 640px) {
   html, body, #root { background-color: #F47B3A; }
   .site-shell, .site-main { background-color: #F47B3A !important; }
