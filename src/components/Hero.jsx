@@ -4,8 +4,15 @@ import InstagramIcon from './InstagramIcon';
 
 export default function Hero({ searchQuery, setSearchQuery, onOpenInstaModal, setActiveTab }) {
   const jumpToPlanner = () => document.getElementById('find-my-place')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
   return (
     <div className="relative overflow-hidden bg-[#FFF4E6] text-[#3A1F14] py-14 sm:py-24 border-b border-[#E7B894]">
+      <style>{`
+        .date-bike-motion { transform-box: fill-box; transform-origin: center; }
+        @media (prefers-reduced-motion: reduce) {
+          .date-bike-motion { display: none; }
+        }
+      `}</style>
       <div className="absolute -top-32 right-[-10%] w-[560px] h-[560px] bg-[#CC3A63]/10 blur-3xl rounded-full pointer-events-none"></div>
       <div className="absolute bottom-[-35%] left-[-8%] w-[460px] h-[460px] bg-[#7A2E12]/8 blur-3xl rounded-full pointer-events-none"></div>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -19,9 +26,28 @@ export default function Hero({ searchQuery, setSearchQuery, onOpenInstaModal, se
           </div>
           <div className="relative">
             <div className="rounded-[34px] bg-[#7A2E12] p-3 shadow-[0_28px_70px_rgba(89,37,15,0.22)] rotate-1">
-              <div className="rounded-[26px] bg-[#FCE6D0] min-h-[310px] sm:min-h-[380px] p-6 sm:p-8 flex flex-col justify-between border border-[#E7B894]">
+              <div className="relative rounded-[26px] bg-[#FCE6D0] min-h-[310px] sm:min-h-[380px] p-6 sm:p-8 flex flex-col justify-between border border-[#E7B894] overflow-visible">
                 <div><p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#CC3A63]">Start here</p><h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#3A1F14] mt-2">Where should we eat?</h2><p className="text-sm text-[#725344] mt-3">Pick an area, set your budget and tell us who you're with.</p></div>
                 <div className="space-y-3"><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><MapPin className="w-5 h-5 text-[#CC3A63]"/><span className="text-sm font-semibold text-[#5A3C2D]">Connaught Place</span></div><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><span className="w-5 h-5 rounded-full bg-[#CC3A63]/15 text-[#CC3A63] flex items-center justify-center text-xs font-bold">₹</span><span className="text-sm font-semibold text-[#5A3C2D]">₹1,000 • 2 people</span></div><div className="rounded-2xl bg-[#CC3A63] text-white px-4 py-3 flex items-center justify-center gap-2 font-bold text-sm"><Search className="w-4 h-4"/>Show me the best matches</div></div>
+
+                <div className="absolute inset-[-18px] pointer-events-none z-20" aria-hidden="true">
+                  <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+                    <path d="M 18 12 H 82 Q 90 12 90 20 V 80 Q 90 88 82 88 H 18 Q 10 88 10 80 V 20 Q 10 12 18 12 Z" fill="none" stroke="#CC3A63" strokeOpacity="0.16" strokeWidth="0.8" strokeDasharray="2 3" />
+                    <g className="date-bike-motion">
+                      <animateMotion dur="13s" repeatCount="indefinite" rotate="auto" path="M 18 12 H 82 Q 90 12 90 20 V 80 Q 90 88 82 88 H 18 Q 10 88 10 80 V 20 Q 10 12 18 12 Z" />
+                      <g transform="translate(-5 -7) scale(0.8)">
+                        <circle cx="7" cy="15" r="2.3" fill="#3A1F14" />
+                        <circle cx="12" cy="14" r="2.3" fill="#CC3A63" />
+                        <path d="M 7 18 L 9 22 L 13 19 L 15 22" fill="none" stroke="#7A2E12" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M 6 22 L 11 22 L 14 19" fill="none" stroke="#3A1F14" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                        <circle cx="6" cy="24" r="2.4" fill="none" stroke="#3A1F14" strokeWidth="1.4" />
+                        <circle cx="15" cy="24" r="2.4" fill="none" stroke="#3A1F14" strokeWidth="1.4" />
+                        <path d="M 6 22 L 9 19 L 12 22 L 15 22 M 9 19 L 11 17" fill="none" stroke="#3A1F14" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M 11 17 L 13 17" stroke="#CC3A63" strokeWidth="1.2" strokeLinecap="round" />
+                      </g>
+                    </g>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
