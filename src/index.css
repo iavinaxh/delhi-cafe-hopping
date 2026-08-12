@@ -17,10 +17,8 @@ a { color: inherit; }
 ::selection { background: #7A2E12; color: #FFF4E6; }
 section { scroll-margin-top: 88px; }
 
-/* The page background is always orange. Cream is reserved for cards and content surfaces. */
 .site-shell, .site-main { background-color: #F47B3A !important; }
 
-/* Catalogue surface: rounded edges, depth and a subtle lift make the cream panel feel embedded in the orange page rather than pasted onto it. */
 .catalogue-shell {
   position: relative;
   margin-top: 2rem;
@@ -42,25 +40,64 @@ section { scroll-margin-top: 88px; }
 }
 
 .catalogue-content { position: relative; z-index: 1; }
+.catalogue-card-enter { opacity: 0; animation: catalogueCardIn 520ms cubic-bezier(.22, 1, .36, 1) var(--card-delay, 0ms) forwards; }
 
-.catalogue-card-enter {
-  opacity: 0;
-  animation: catalogueCardIn 520ms cubic-bezier(.22, 1, .36, 1) var(--card-delay, 0ms) forwards;
-}
+@keyframes catalogueLift { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes catalogueCardIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes catalogueLift {
-  from { opacity: 0; transform: translateY(18px) scale(.985); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+/* Decorative hero art is always contained by its own layout box. It never sits above cards or captures clicks. */
+.hero-search-row {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  min-width: 0;
 }
+.hero-search-button { min-width: 0; }
+.date-dinner-sticker {
+  position: relative;
+  flex: 0 0 clamp(64px, 12vw, 94px);
+  width: clamp(64px, 12vw, 94px);
+  aspect-ratio: 1.25;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #FFF4E6;
+  border: 1px solid #E7B894;
+  box-shadow: 0 6px 16px rgba(89,37,15,.10);
+  pointer-events: none;
+}
+.date-dinner-art { position: absolute; inset: 0; }
+.date-dinner-head { position: absolute; width: 13%; aspect-ratio: 1; border-radius: 50%; top: 20%; background: #3A1F14; }
+.head-one { left: 28%; }
+.head-two { right: 28%; background: #CC3A63; }
+.date-dinner-body { position: absolute; width: 24%; height: 24%; top: 38%; border-radius: 45% 45% 20% 20%; }
+.body-one { left: 22%; background: #7A2E12; }
+.body-two { right: 22%; background: #CC3A63; }
+.date-dinner-table { position: absolute; left: 10%; right: 10%; bottom: 20%; height: 7%; border-radius: 999px; background: #7A2E12; }
+.date-dinner-plate { position: absolute; left: 43%; bottom: 24%; width: 14%; height: 6%; border-radius: 50%; background: #E7B894; }
+.food-steam { position: absolute; top: 27%; width: 2px; height: 18%; border-radius: 999px; background: #CC3A63; }
+.steam-one { left: 48%; transform: rotate(10deg); }
+.steam-two { left: 54%; transform: rotate(-10deg); }
 
-@keyframes catalogueCardIn {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+.hero-support-row { display: flex; align-items: center; gap: 1rem; min-width: 0; }
+.hero-support-search { position: relative; flex: 1 1 auto; min-width: 0; }
+.food-delivery-sticker {
+  position: relative;
+  flex: 0 0 clamp(72px, 10vw, 104px);
+  width: clamp(72px, 10vw, 104px);
+  height: clamp(54px, 7vw, 76px);
+  border-radius: 1.1rem;
+  background: #FCE6D0;
+  border: 1px solid #E7B894;
+  box-shadow: 0 8px 18px rgba(89,37,15,.10);
+  pointer-events: none;
+  overflow: hidden;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .catalogue-shell, .catalogue-card-enter { animation: none; opacity: 1; transform: none; }
-}
+.food-delivery-bike { position: absolute; left: 12%; bottom: 16%; width: 50%; height: 50%; color: #7A2E12; }
+.food-bag { position: absolute; right: 12%; top: 18%; width: 29%; aspect-ratio: 1; border-radius: .45rem; background: #CC3A63; color: #FFF4E6; display: grid; place-items: center; transform: rotate(5deg); }
+.food-bag svg { width: 58%; height: 58%; }
+.delivery-spark { position: absolute; color: #CC3A63; font-weight: 800; font-size: 11px; }
+.spark-one { right: 8%; bottom: 13%; }
+.spark-two { left: 12%; top: 12%; }
 
 @media (max-width: 640px) {
   html, body, #root { background-color: #F47B3A; }
@@ -69,4 +106,21 @@ section { scroll-margin-top: 88px; }
   button, a { touch-action: manipulation; }
   input, select, button { min-height: 44px; }
   .catalogue-shell { margin-top: 1rem; margin-bottom: 1rem; border-radius: 1.5rem; }
+  .hero-search-row { align-items: stretch; }
+  .hero-search-button { min-height: 48px; }
+  .date-dinner-sticker { flex-basis: 70px; width: 70px; }
+  .hero-support-row { gap: .65rem; }
+  .food-delivery-sticker { flex-basis: 72px; width: 72px; height: 56px; }
+}
+
+@media (max-width: 420px) {
+  .hero-search-row { display: grid; grid-template-columns: minmax(0, 1fr) 64px; gap: .55rem; }
+  .date-dinner-sticker { width: 64px; flex-basis: 64px; }
+  .hero-support-row { display: block; }
+  .food-delivery-sticker { width: 76px; height: 58px; margin: .65rem auto 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalogue-shell, .catalogue-card-enter { animation: none; opacity: 1; transform: none; }
+  .date-dinner-art, .food-steam, .food-delivery-sticker, .delivery-spark { animation: none !important; }
 }
