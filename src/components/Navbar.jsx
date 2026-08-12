@@ -5,15 +5,34 @@ import InstagramIcon from './InstagramIcon';
 export default function Navbar({ wishlistCount, onOpenWishlist, onOpenInstaModal, activeTab, setActiveTab, onOpenContact, onGoHome }) {
   const active = (tab) => activeTab === tab ? 'bg-[#FCE6D0] text-[#7A2E12] border border-[#E7B894]' : 'text-[#6F5041] hover:text-[#7A2E12] hover:bg-[#FFF4E6]';
 
+  const scrollToSection = (tab) => {
+    document.getElementById(`section-${tab}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   const goToSection = (tab) => {
     setActiveTab(tab);
-    const scroll = () => document.getElementById(`section-${tab}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    requestAnimationFrame(scroll);
+    if (document.getElementById(`section-${tab}`)) {
+      requestAnimationFrame(() => scrollToSection(tab));
+      return;
+    }
+
+    // Contact is a separate route/view. Return to the home view first, then
+    // scroll after React has rendered the requested section.
+    onGoHome?.();
+    window.setTimeout(() => scrollToSection(tab), 80);
   };
 
   const findMyPlace = () => {
     setActiveTab('finder');
-    document.getElementById('find-my-place')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (document.getElementById('find-my-place')) {
+      document.getElementById('find-my-place')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    onGoHome?.();
+    window.setTimeout(() => {
+      document.getElementById('find-my-place')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
   };
 
   const goHome = () => {
