@@ -99,25 +99,57 @@ section { scroll-margin-top: 88px; }
 .spark-one { right: 8%; bottom: 13%; }
 .spark-two { left: 12%; top: 12%; }
 
-/* Desktop finder layout: keep Vibe, budget plan and Find My Places on one clean row. */
-@media (min-width: 1024px) {
+/* Finder layout: desktop/tablet keeps the three primary controls aligned in one row. */
+@media (min-width: 768px) {
   #find-my-place form > div {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
   }
 
-  #find-my-place form > div > label:nth-child(4) {
-    grid-column: 1;
+  /* Row 1: Where 50% | Budget 25% | People 25% */
+  #find-my-place form > div > label:nth-child(1) {
+    grid-column: 1 / span 6;
+    grid-row: 1;
   }
 
-  #find-my-place form > div > div:nth-child(5) {
-    grid-column: 2 / span 2;
+  #find-my-place form > div > label:nth-child(2) {
+    grid-column: 7 / span 3;
+    grid-row: 1;
+  }
+
+  #find-my-place form > div > label:nth-child(3) {
+    grid-column: 10 / span 3;
+    grid-row: 1;
+  }
+
+  /* Row 2: Find My Places 66.67% | Vibe 33.33% */
+  #find-my-place form > div > div:nth-child(4) {
+    grid-column: 1 / span 8;
+    grid-row: 2;
+    align-self: start;
+  }
+
+  #find-my-place form > div > label:nth-child(5) {
+    grid-column: 9 / span 4;
     grid-row: 2;
   }
 
+  /* Row 3: Budget plan, full width and vertical below the search row. */
   #find-my-place form > div > div:nth-child(6) {
-    grid-column: 4;
-    grid-row: 2;
-    align-self: center;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  #find-my-place form > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #find-my-place form > div > * {
+    grid-column: 1 !important;
+    grid-row: auto !important;
   }
 }
 
