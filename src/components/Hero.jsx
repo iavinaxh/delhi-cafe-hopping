@@ -2,6 +2,55 @@ import React from 'react';
 import { Search, Sparkles, MapPin, Compass, ShieldCheck, SlidersHorizontal } from 'lucide-react';
 import InstagramIcon from './InstagramIcon';
 
+function DateBike() {
+  return (
+    <g className="date-bike-motion">
+      <animateMotion
+        dur="13s"
+        repeatCount="indefinite"
+        rotate="auto"
+        path="M 18 12 H 82 Q 90 12 90 20 V 80 Q 90 88 82 88 H 18 Q 10 88 10 80 V 20 Q 10 12 18 12 Z"
+      />
+      <g transform="translate(-8 -10) scale(0.9)">
+        {/* Motorbike / scooter silhouette */}
+        <circle cx="8" cy="25" r="3.4" fill="none" stroke="#3A1F14" strokeWidth="1.8" />
+        <circle cx="22" cy="25" r="3.4" fill="none" stroke="#3A1F14" strokeWidth="1.8" />
+        <path d="M8 25 L12 20 L18 25 L22 25 L19 19 L14 19 L12 20" fill="none" stroke="#7A2E12" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M18 19 L21 16 L23 16" fill="none" stroke="#3A1F14" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M11 18 H18" stroke="#CC3A63" strokeWidth="2.2" strokeLinecap="round" />
+        {/* Rider */}
+        <circle cx="13" cy="11" r="2.8" fill="#3A1F14" />
+        <path d="M13 14 L14 18 L18 20 M14 16 L11 19" fill="none" stroke="#3A1F14" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        {/* Passenger */}
+        <circle cx="19" cy="11" r="2.8" fill="#CC3A63" />
+        <path d="M19 14 L18 18 L21 20 M18 16 L21 17" fill="none" stroke="#CC3A63" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+    </g>
+  );
+}
+
+function EatingCouple() {
+  return (
+    <div className="date-dinner-motion w-[96px] sm:w-[112px] h-[52px] sm:h-[58px] shrink-0 rounded-2xl bg-[#FFF4E6] border border-[#E7B894] flex items-center justify-center shadow-sm" aria-hidden="true">
+      <svg viewBox="0 0 120 64" className="w-full h-full" fill="none">
+        <g className="date-dinner-people">
+          <circle cx="42" cy="17" r="6" fill="#3A1F14" />
+          <path d="M34 29 Q42 23 50 29 L53 39 H31 Z" fill="#7A2E12" />
+          <circle cx="78" cy="17" r="6" fill="#CC3A63" />
+          <path d="M70 29 Q78 23 86 29 L89 39 H67 Z" fill="#CC3A63" />
+        </g>
+        <path d="M24 41 H96" stroke="#7A2E12" strokeWidth="3" strokeLinecap="round" />
+        <path d="M31 44 V56 M89 44 V56" stroke="#7A2E12" strokeWidth="2.5" strokeLinecap="round" />
+        <ellipse cx="60" cy="40" rx="14" ry="4" fill="#E7B894" />
+        <path d="M51 38 Q55 32 60 38 Q65 32 69 38" stroke="#CC3A63" strokeWidth="2" strokeLinecap="round" />
+        <path className="food-steam" d="M57 29 Q54 25 57 21 M64 29 Q67 25 64 21" stroke="#CC3A63" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="47" cy="38" r="2" fill="#3A1F14" />
+        <circle cx="73" cy="38" r="2" fill="#3A1F14" />
+      </svg>
+    </div>
+  );
+}
+
 export default function Hero({ searchQuery, setSearchQuery, onOpenInstaModal, setActiveTab }) {
   const jumpToPlanner = () => document.getElementById('find-my-place')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
@@ -9,7 +58,12 @@ export default function Hero({ searchQuery, setSearchQuery, onOpenInstaModal, se
     <div className="relative overflow-hidden bg-[#FFF4E6] text-[#3A1F14] py-14 sm:py-24 border-b border-[#E7B894]">
       <style>{`
         .date-bike-motion { transform-box: fill-box; transform-origin: center; }
+        .date-dinner-people { animation: dinner-bob 2.8s ease-in-out infinite; transform-origin: 60px 30px; }
+        .food-steam { animation: food-steam 2.2s ease-in-out infinite; opacity: .65; }
+        @keyframes dinner-bob { 0%,100% { transform: translateY(1px); } 50% { transform: translateY(-2px); } }
+        @keyframes food-steam { 0%,100% { opacity: .2; transform: translateY(2px); } 50% { opacity: .8; transform: translateY(-2px); } }
         @media (prefers-reduced-motion: reduce) {
+          .date-bike-motion, .date-dinner-people, .food-steam { animation: none !important; }
           .date-bike-motion { display: none; }
         }
       `}</style>
@@ -24,31 +78,17 @@ export default function Hero({ searchQuery, setSearchQuery, onOpenInstaModal, se
             <div className="mt-7 flex flex-wrap gap-2 text-xs text-[#6F5041]"><span className="px-3 py-2 rounded-full bg-white/70 border border-[#E7B894] flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-[#CC3A63]"/>Curated venues</span><span className="px-3 py-2 rounded-full bg-white/70 border border-[#E7B894] flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-[#7A2E12]"/>Delhi NCR areas</span><span className="px-3 py-2 rounded-full bg-white/70 border border-[#E7B894] flex items-center gap-1.5"><Compass className="w-3.5 h-3.5 text-[#CC3A63]"/>Budget-aware picks</span></div>
             <div className="mt-8 flex flex-col sm:flex-row gap-3"><button onClick={jumpToPlanner} className="text-sm text-white bg-[#CC3A63] border border-[#CC3A63] px-6 py-3.5 rounded-full flex items-center justify-center gap-2 hover:bg-[#B52F55] transition-all shadow-md"><SlidersHorizontal className="w-4 h-4"/>Find my place<span className="font-semibold">→</span></button><button onClick={()=>setActiveTab('quick')} className="text-sm text-[#7A2E12] bg-white/70 border border-[#E7B894] px-6 py-3.5 rounded-full flex items-center justify-center gap-2 hover:bg-[#FCE6D0] transition-all"><span className="w-2 h-2 rounded-full bg-[#CC3A63]"></span>10-second picks</button></div>
           </div>
-          <div className="relative">
-            <div className="rounded-[34px] bg-[#7A2E12] p-3 shadow-[0_28px_70px_rgba(89,37,15,0.22)] rotate-1">
-              <div className="relative rounded-[26px] bg-[#FCE6D0] min-h-[310px] sm:min-h-[380px] p-6 sm:p-8 flex flex-col justify-between border border-[#E7B894] overflow-visible">
+          <div className="relative overflow-visible py-4 sm:py-6 px-2 sm:px-4">
+            <div className="relative rounded-[34px] bg-[#7A2E12] p-3 shadow-[0_28px_70px_rgba(89,37,15,0.22)] rotate-1">
+              <div className="rounded-[26px] bg-[#FCE6D0] min-h-[310px] sm:min-h-[380px] p-6 sm:p-8 flex flex-col justify-between border border-[#E7B894]">
                 <div><p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#CC3A63]">Start here</p><h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#3A1F14] mt-2">Where should we eat?</h2><p className="text-sm text-[#725344] mt-3">Pick an area, set your budget and tell us who you're with.</p></div>
-                <div className="space-y-3"><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><MapPin className="w-5 h-5 text-[#CC3A63]"/><span className="text-sm font-semibold text-[#5A3C2D]">Connaught Place</span></div><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><span className="w-5 h-5 rounded-full bg-[#CC3A63]/15 text-[#CC3A63] flex items-center justify-center text-xs font-bold">₹</span><span className="text-sm font-semibold text-[#5A3C2D]">₹1,000 • 2 people</span></div><div className="rounded-2xl bg-[#CC3A63] text-white px-4 py-3 flex items-center justify-center gap-2 font-bold text-sm"><Search className="w-4 h-4"/>Show me the best matches</div></div>
-
-                <div className="absolute inset-[-18px] pointer-events-none z-20" aria-hidden="true">
-                  <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
-                    <path d="M 18 12 H 82 Q 90 12 90 20 V 80 Q 90 88 82 88 H 18 Q 10 88 10 80 V 20 Q 10 12 18 12 Z" fill="none" stroke="#CC3A63" strokeOpacity="0.16" strokeWidth="0.8" strokeDasharray="2 3" />
-                    <g className="date-bike-motion">
-                      <animateMotion dur="13s" repeatCount="indefinite" rotate="auto" path="M 18 12 H 82 Q 90 12 90 20 V 80 Q 90 88 82 88 H 18 Q 10 88 10 80 V 20 Q 10 12 18 12 Z" />
-                      <g transform="translate(-5 -7) scale(0.8)">
-                        <circle cx="7" cy="15" r="2.3" fill="#3A1F14" />
-                        <circle cx="12" cy="14" r="2.3" fill="#CC3A63" />
-                        <path d="M 7 18 L 9 22 L 13 19 L 15 22" fill="none" stroke="#7A2E12" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M 6 22 L 11 22 L 14 19" fill="none" stroke="#3A1F14" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                        <circle cx="6" cy="24" r="2.4" fill="none" stroke="#3A1F14" strokeWidth="1.4" />
-                        <circle cx="15" cy="24" r="2.4" fill="none" stroke="#3A1F14" strokeWidth="1.4" />
-                        <path d="M 6 22 L 9 19 L 12 22 L 15 22 M 9 19 L 11 17" fill="none" stroke="#3A1F14" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M 11 17 L 13 17" stroke="#CC3A63" strokeWidth="1.2" strokeLinecap="round" />
-                      </g>
-                    </g>
-                  </svg>
-                </div>
+                <div className="space-y-3"><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><MapPin className="w-5 h-5 text-[#CC3A63]"/><span className="text-sm font-semibold text-[#5A3C2D]">Connaught Place</span></div><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><span className="w-5 h-5 rounded-full bg-[#CC3A63]/15 text-[#CC3A63] flex items-center justify-center text-xs font-bold">₹</span><span className="text-sm font-semibold text-[#5A3C2D]">₹1,000 • 2 people</span></div><div className="flex items-center gap-2"><div className="flex-1 rounded-2xl bg-[#CC3A63] text-white px-4 py-3 flex items-center justify-center gap-2 font-bold text-sm"><Search className="w-4 h-4"/>Show me the best matches</div><EatingCouple /></div></div>
               </div>
+            </div>
+            <div className="absolute inset-0 pointer-events-none z-20" aria-hidden="true">
+              <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+                <DateBike />
+              </svg>
             </div>
           </div>
         </div>
