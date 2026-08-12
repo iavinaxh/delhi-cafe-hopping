@@ -11,7 +11,10 @@ import InstaModal from './components/InstaModal';
 import WishlistDrawer from './components/WishlistDrawer';
 import Footer from './components/Footer';
 import { cafesData } from './data/cafes';
+import { PREMIUM_CAFES } from './data/premiumCafes';
 import { MapPin, Utensils, Globe, X, ShoppingBag } from 'lucide-react';
+
+const allCafes = [...cafesData, ...PREMIUM_CAFES];
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -65,7 +68,7 @@ export default function App() {
         <ContactPage />
         <Footer onOpenInstaModal={() => setIsInstaModalOpen(true)} onOpenContact={openContactPage} />
         <InstaModal isOpen={isInstaModalOpen} onClose={() => setIsInstaModalOpen(false)} />
-        <WishlistDrawer isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlist={wishlist} cafes={cafesData} onToggleWishlist={toggleWishlist} onSelectCafe={() => {}} />
+        <WishlistDrawer isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlist={wishlist} cafes={allCafes} onToggleWishlist={toggleWishlist} onSelectCafe={() => {}} />
       </div>
     );
   }
@@ -76,16 +79,16 @@ export default function App() {
         <Navbar wishlistCount={wishlist.length} onOpenWishlist={() => setIsWishlistOpen(true)} onOpenInstaModal={() => setIsInstaModalOpen(true)} activeTab={activeTab} setActiveTab={setActiveTab} onOpenContact={openContactPage} onGoHome={goHome} />
         <Hero searchQuery={searchQuery} setSearchQuery={(q) => { setSearchQuery(q); if (activeTab !== 'explore') setActiveTab('explore'); }} onOpenInstaModal={() => setIsInstaModalOpen(true)} setActiveTab={setActiveTab} />
         <main className="bg-[#F47B3A] pb-16 site-main">
-          <RecommendationPlanner cafes={cafesData} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={setSelectedCafe} />
-          {activeTab === 'explore' && <div id="section-explore" className="scroll-mt-24"><CafeExplorer cafes={cafesData} searchQuery={searchQuery} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={(cafe) => setSelectedCafe(cafe)} /></div>}
-          {activeTab === 'quick' && <div id="section-quick" className="scroll-mt-24"><QuickDecisions cafes={cafesData} onSelectCafe={(cafe) => setSelectedCafe(cafe)} /></div>}
+          <RecommendationPlanner cafes={allCafes} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={setSelectedCafe} />
+          {activeTab === 'explore' && <div id="section-explore" className="scroll-mt-24"><CafeExplorer cafes={allCafes} searchQuery={searchQuery} wishlist={wishlist} onToggleWishlist={toggleWishlist} onSelectCafe={(cafe) => setSelectedCafe(cafe)} /></div>}
+          {activeTab === 'quick' && <div id="section-quick" className="scroll-mt-24"><QuickDecisions cafes={allCafes} onSelectCafe={(cafe) => setSelectedCafe(cafe)} /></div>}
           {activeTab === 'plans' && <div id="section-plans" className="scroll-mt-24"><DatePlansSection /></div>}
           {activeTab === 'metro' && <div id="section-metro" className="scroll-mt-24"><MetroGuideSection /></div>}
         </main>
       </div>
       <Footer onOpenInstaModal={() => setIsInstaModalOpen(true)} onOpenContact={openContactPage} />
       <InstaModal isOpen={isInstaModalOpen} onClose={() => setIsInstaModalOpen(false)} />
-      <WishlistDrawer isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlist={wishlist} cafes={cafesData} onToggleWishlist={toggleWishlist} onSelectCafe={(cafe) => setSelectedCafe(cafe)} />
+      <WishlistDrawer isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlist={wishlist} cafes={allCafes} onToggleWishlist={toggleWishlist} onSelectCafe={(cafe) => setSelectedCafe(cafe)} />
 
       {selectedCafe && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#3A1F14]/75 backdrop-blur-md animate-fadeIn" onClick={() => setSelectedCafe(null)}>
