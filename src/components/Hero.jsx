@@ -2,33 +2,6 @@ import React from 'react';
 import { Search, Sparkles, MapPin, Compass, ShieldCheck, SlidersHorizontal } from 'lucide-react';
 import InstagramIcon from './InstagramIcon';
 
-function DateBike() {
-  return (
-    <g className="date-bike-motion">
-      <animateMotion
-        dur="13s"
-        repeatCount="indefinite"
-        rotate="auto"
-        path="M 18 12 H 82 Q 90 12 90 20 V 80 Q 90 88 82 88 H 18 Q 10 88 10 80 V 20 Q 10 12 18 12 Z"
-      />
-      <g transform="translate(-8 -10) scale(0.9)">
-        {/* Motorbike / scooter silhouette */}
-        <circle cx="8" cy="25" r="3.4" fill="none" stroke="#3A1F14" strokeWidth="1.8" />
-        <circle cx="22" cy="25" r="3.4" fill="none" stroke="#3A1F14" strokeWidth="1.8" />
-        <path d="M8 25 L12 20 L18 25 L22 25 L19 19 L14 19 L12 20" fill="none" stroke="#7A2E12" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M18 19 L21 16 L23 16" fill="none" stroke="#3A1F14" strokeWidth="1.8" strokeLinecap="round" />
-        <path d="M11 18 H18" stroke="#CC3A63" strokeWidth="2.2" strokeLinecap="round" />
-        {/* Rider */}
-        <circle cx="13" cy="11" r="2.8" fill="#3A1F14" />
-        <path d="M13 14 L14 18 L18 20 M14 16 L11 19" fill="none" stroke="#3A1F14" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        {/* Passenger */}
-        <circle cx="19" cy="11" r="2.8" fill="#CC3A63" />
-        <path d="M19 14 L18 18 L21 20 M18 16 L21 17" fill="none" stroke="#CC3A63" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      </g>
-    </g>
-  );
-}
-
 function EatingCouple() {
   return (
     <div className="date-dinner-motion w-[96px] sm:w-[112px] h-[52px] sm:h-[58px] shrink-0 rounded-2xl bg-[#FFF4E6] border border-[#E7B894] flex items-center justify-center shadow-sm" aria-hidden="true">
@@ -57,14 +30,12 @@ export default function Hero({ searchQuery, setSearchQuery, onOpenInstaModal, se
   return (
     <div className="relative overflow-hidden bg-[#FFF4E6] text-[#3A1F14] py-14 sm:py-24 border-b border-[#E7B894]">
       <style>{`
-        .date-bike-motion { transform-box: fill-box; transform-origin: center; }
         .date-dinner-people { animation: dinner-bob 2.8s ease-in-out infinite; transform-origin: 60px 30px; }
         .food-steam { animation: food-steam 2.2s ease-in-out infinite; opacity: .65; }
         @keyframes dinner-bob { 0%,100% { transform: translateY(1px); } 50% { transform: translateY(-2px); } }
         @keyframes food-steam { 0%,100% { opacity: .2; transform: translateY(2px); } 50% { opacity: .8; transform: translateY(-2px); } }
         @media (prefers-reduced-motion: reduce) {
-          .date-bike-motion, .date-dinner-people, .food-steam { animation: none !important; }
-          .date-bike-motion { display: none; }
+          .date-dinner-people, .food-steam { animation: none !important; }
         }
       `}</style>
       <div className="absolute -top-32 right-[-10%] w-[560px] h-[560px] bg-[#CC3A63]/10 blur-3xl rounded-full pointer-events-none"></div>
@@ -84,11 +55,6 @@ export default function Hero({ searchQuery, setSearchQuery, onOpenInstaModal, se
                 <div><p className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#CC3A63]">Start here</p><h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#3A1F14] mt-2">Where should we eat?</h2><p className="text-sm text-[#725344] mt-3">Pick an area, set your budget and tell us who you're with.</p></div>
                 <div className="space-y-3"><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><MapPin className="w-5 h-5 text-[#CC3A63]"/><span className="text-sm font-semibold text-[#5A3C2D]">Connaught Place</span></div><div className="rounded-2xl bg-[#FFF4E6] border border-[#E7B894] px-4 py-3 flex items-center gap-3"><span className="w-5 h-5 rounded-full bg-[#CC3A63]/15 text-[#CC3A63] flex items-center justify-center text-xs font-bold">₹</span><span className="text-sm font-semibold text-[#5A3C2D]">₹1,000 • 2 people</span></div><div className="flex items-center gap-2"><div className="flex-1 rounded-2xl bg-[#CC3A63] text-white px-4 py-3 flex items-center justify-center gap-2 font-bold text-sm"><Search className="w-4 h-4"/>Show me the best matches</div><EatingCouple /></div></div>
               </div>
-            </div>
-            <div className="absolute inset-0 pointer-events-none z-20" aria-hidden="true">
-              <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
-                <DateBike />
-              </svg>
             </div>
           </div>
         </div>
