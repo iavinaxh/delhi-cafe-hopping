@@ -45,7 +45,6 @@ section { scroll-margin-top: 88px; }
 @keyframes catalogueLift { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes catalogueCardIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Decorative hero art is always contained by its own layout box. It never sits above cards or captures clicks. */
 .hero-search-row {
   display: flex;
   align-items: center;
@@ -99,40 +98,19 @@ section { scroll-margin-top: 88px; }
 .spark-one { right: 8%; bottom: 13%; }
 .spark-two { left: 12%; top: 12%; }
 
-/* Finder layout: desktop/tablet keeps the three primary controls aligned in one row. */
 @media (min-width: 768px) {
   #find-my-place form > div {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     align-items: start;
   }
 
-  /* Row 1: Where 50% | Budget 25% | People 25% */
-  #find-my-place form > div > label:nth-child(1) {
-    grid-column: 1 / span 6;
-    grid-row: 1;
-  }
+  #find-my-place form > div > label:nth-child(1) { grid-column: 1 / span 6; grid-row: 1; }
+  #find-my-place form > div > label:nth-child(2) { grid-column: 7 / span 3; grid-row: 1; }
+  #find-my-place form > div > label:nth-child(3) { grid-column: 10 / span 3; grid-row: 1; }
 
-  #find-my-place form > div > label:nth-child(2) {
-    grid-column: 7 / span 3;
-    grid-row: 1;
-  }
+  #find-my-place form > div > label:nth-child(-n+3) > .relative { margin-top: 8px !important; }
+  #find-my-place form > div > label:nth-child(1) > .relative { transform: translateY(-19px); }
 
-  #find-my-place form > div > label:nth-child(3) {
-    grid-column: 10 / span 3;
-    grid-row: 1;
-  }
-
-  /* Keep all first-row dropdown controls on exactly the same horizontal line. */
-  #find-my-place form > div > label:nth-child(-n+3) > .relative {
-    margin-top: 8px !important;
-  }
-
-  /* The Where control has an extra vertical offset in the component. Normalize only that control. */
-  #find-my-place form > div > label:nth-child(1) > .relative {
-    transform: translateY(-19px);
-  }
-
-  /* Add a location pin inside the Where dropdown without changing component behavior. */
   #find-my-place form > div > label:nth-child(1) > .relative::before {
     content: '';
     position: absolute;
@@ -146,38 +124,137 @@ section { scroll-margin-top: 88px; }
     background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%237A2E12' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
   }
 
-  #find-my-place form > div > label:nth-child(1) select {
-    padding-left: 40px !important;
-  }
-
-  /* Row 2: Find My Places 66.67% | Vibe 33.33% */
-  #find-my-place form > div > div:nth-child(4) {
-    grid-column: 1 / span 8;
-    grid-row: 2;
-    align-self: start;
-  }
-
-  #find-my-place form > div > label:nth-child(5) {
-    grid-column: 9 / span 4;
-    grid-row: 2;
-  }
-
-  /* Row 3: Budget plan, full width and vertical below the search row. */
-  #find-my-place form > div > div:nth-child(6) {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    width: 100%;
-  }
+  #find-my-place form > div > label:nth-child(1) select { padding-left: 40px !important; }
+  #find-my-place form > div > div:nth-child(4) { grid-column: 1 / span 8; grid-row: 2; align-self: start; }
+  #find-my-place form > div > label:nth-child(5) { grid-column: 9 / span 4; grid-row: 2; }
+  #find-my-place form > div > div:nth-child(6) { grid-column: 1 / -1; grid-row: 3; width: 100%; }
 }
 
 @media (max-width: 767px) {
-  #find-my-place form > div {
-    grid-template-columns: minmax(0, 1fr);
+  #find-my-place form {
+    padding: 16px !important;
+    border-radius: 24px !important;
   }
 
-  #find-my-place form > div > * {
+  #find-my-place form > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px !important;
+    align-items: start;
+  }
+
+  #find-my-place form > div > label:nth-child(1),
+  #find-my-place form > div > div:nth-child(4),
+  #find-my-place form > label:nth-child(5),
+  #find-my-place form > div > label:nth-child(5),
+  #find-my-place form > div > div:nth-child(6) {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    width: 100%;
+  }
+
+  #find-my-place form > div > label:nth-child(2) {
     grid-column: 1 !important;
     grid-row: auto !important;
+  }
+
+  #find-my-place form > div > label:nth-child(3) {
+    grid-column: 2 !important;
+    grid-row: auto !important;
+  }
+
+  #find-my-place form > div > label:nth-child(1) > .relative {
+    margin-top: 7px !important;
+    transform: none !important;
+  }
+
+  #find-my-place form > div > label:nth-child(1) > .relative::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    left: 13px;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%237A2E12' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
+  }
+
+  #find-my-place form > div > label:nth-child(1) select { padding-left: 40px !important; }
+
+  #find-my-place form > div > label > .relative,
+  #find-my-place form > div > div:nth-child(4) > button,
+  #find-my-place form > div > label:nth-child(5) select {
+    width: 100% !important;
+  }
+
+  #find-my-place form > div > div:nth-child(4) > button {
+    min-height: 50px;
+    border-radius: 16px;
+    box-shadow: 0 10px 22px rgba(89,37,15,.16);
+  }
+
+  #find-my-place form > div > div:nth-child(6) {
+    margin-top: 0;
+  }
+
+  #find-my-place form > div > div:nth-child(6) > div {
+    min-height: 0 !important;
+    padding: 14px 16px !important;
+    border-radius: 18px !important;
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    align-items: center;
+    gap: 10px;
+  }
+
+  #find-my-place form > div > div:nth-child(6) p {
+    overflow-wrap: anywhere;
+  }
+
+  #find-my-place form > div > div:nth-child(6) .text-xs,
+  #find-my-place form > div > div:nth-child(6) .text-sm {
+    line-height: 1.35;
+  }
+
+  #find-my-place article {
+    border-radius: 22px !important;
+    box-shadow: 0 10px 26px rgba(89,37,15,.12) !important;
+  }
+
+  #find-my-place article > div:first-child {
+    padding: 15px 16px !important;
+  }
+
+  #find-my-place article h4 {
+    font-size: 18px !important;
+    line-height: 1.18 !important;
+  }
+
+  #find-my-place article > div:last-child {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  #find-my-place article a {
+    min-height: 46px !important;
+    border-radius: 12px !important;
+  }
+
+  #find-my-place article .grid-cols-4,
+  #find-my-place article .grid-cols-3 {
+    gap: 6px !important;
+  }
+
+  #find-my-place article .grid-cols-4 a,
+  #find-my-place article .grid-cols-3 a {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  #find-my-place article .grid-cols-4 a,
+  #find-my-place article .grid-cols-3 a {
+    font-size: 9px !important;
   }
 }
 
@@ -196,6 +273,12 @@ section { scroll-margin-top: 88px; }
 }
 
 @media (max-width: 420px) {
+  #find-my-place { padding-left: 10px !important; padding-right: 10px !important; }
+  #find-my-place form { padding: 13px !important; }
+  #find-my-place form > div { gap: 12px !important; }
+  #find-my-place article h4 { font-size: 17px !important; }
+  #find-my-place article .grid-cols-4,
+  #find-my-place article .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .hero-search-row { display: grid; grid-template-columns: minmax(0, 1fr) 64px; gap: .55rem; }
   .date-dinner-sticker { width: 64px; flex-basis: 64px; }
   .hero-support-row { display: block; }
