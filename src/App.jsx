@@ -12,13 +12,14 @@ import WishlistDrawer from './components/WishlistDrawer';
 import Footer from './components/Footer';
 import { cafesData } from './data/cafes';
 import { PREMIUM_CAFES } from './data/premiumCafes';
+import { VERIFIED_VENUES } from './data/verifiedVenues';
 import { MapPin, Utensils, Globe, X, ShoppingBag } from 'lucide-react';
 
-const allCafes = [...cafesData, ...PREMIUM_CAFES];
+const allCafes = [...cafesData, ...PREMIUM_CAFES, ...VERIFIED_VENUES];
 // RecommendationPlanner already has its own ranking logic. Feed it a neutral catalogue order
 // so legacy `isTopPick` flags cannot overpower the user's selected budget/location/vibe.
-// Premium venues are placed first only to break genuine score ties in favour of catalogue coverage.
-const recommendationCafes = [...PREMIUM_CAFES, ...cafesData].map(cafe => ({ ...cafe, isTopPick: false }));
+// Premium and newly verified venues are included so the recommender can surface the broader price/area coverage.
+const recommendationCafes = [...VERIFIED_VENUES, ...PREMIUM_CAFES, ...cafesData].map(cafe => ({ ...cafe, isTopPick: false }));
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
