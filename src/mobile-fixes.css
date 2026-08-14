@@ -107,6 +107,119 @@
   }
 }
 
+/* Recommendation typography: readable at a glance, then stronger when a card expands. */
+#find-my-place article h4 {
+  font-size: clamp(1.08rem, 1.35vw, 1.28rem) !important;
+  line-height: 1.18 !important;
+  font-weight: 750 !important;
+  letter-spacing: -0.01em;
+}
+
+#find-my-place article > div:first-child > div:first-child > div > p {
+  font-size: clamp(0.76rem, 0.9vw, 0.86rem) !important;
+  font-weight: 600 !important;
+}
+
+#find-my-place article > div:first-child > div:last-child p:last-child {
+  font-size: clamp(0.94rem, 1vw, 1.04rem) !important;
+  font-weight: 750 !important;
+}
+
+#find-my-place article[aria-expanded="true"] h4 {
+  font-size: clamp(1.18rem, 1.55vw, 1.42rem) !important;
+  font-weight: 800 !important;
+}
+
+#find-my-place article[aria-expanded="true"] > div:nth-child(2) p {
+  font-size: clamp(0.88rem, 1.05vw, 0.98rem) !important;
+  line-height: 1.58 !important;
+  font-weight: 500 !important;
+}
+
+#find-my-place article[aria-expanded="true"] > div:nth-child(2) > div > div:first-child p:first-child,
+#find-my-place article[aria-expanded="true"] > div:nth-child(2) > div > div > span {
+  font-weight: 800 !important;
+}
+
+#find-my-place article[aria-expanded="true"] > div:nth-child(2) > div > div:first-child p:nth-child(2) {
+  font-size: clamp(0.9rem, 1.1vw, 1rem) !important;
+  font-weight: 650 !important;
+}
+
+#find-my-place article[aria-expanded="true"] > div:nth-child(2) > div > div:first-child p:last-child {
+  font-size: clamp(0.72rem, 0.82vw, 0.8rem) !important;
+  font-weight: 500 !important;
+}
+
+#find-my-place article[aria-expanded="true"] button {
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+}
+
+#find-my-place article[aria-expanded="true"] > div:last-child a {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  #find-my-place article h4 {
+    font-size: 1.12rem !important;
+  }
+
+  #find-my-place article[aria-expanded="true"] h4 {
+    font-size: 1.25rem !important;
+  }
+
+  #find-my-place article[aria-expanded="true"] > div:nth-child(2) p {
+    font-size: 0.9rem !important;
+    line-height: 1.55 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #find-my-place article h4 {
+    font-size: 1.12rem !important;
+    line-height: 1.2 !important;
+  }
+
+  #find-my-place article[aria-expanded="true"] h4 {
+    font-size: 1.2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  #find-my-place article[aria-expanded="true"] > div:nth-child(2) p {
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+  }
+
+  #find-my-place article[aria-expanded="true"] > div:nth-child(2) > div > div:first-child p:nth-child(2) {
+    font-size: 0.9rem !important;
+  }
+
+  #find-my-place article[aria-expanded="true"] button {
+    font-size: 0.76rem !important;
+  }
+
+  #find-my-place article[aria-expanded="true"] > div:last-child a {
+    font-size: 0.68rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  #find-my-place article[aria-expanded="true"] > div:nth-child(2) p {
+    font-size: 0.86rem !important;
+  }
+
+  #find-my-place article[aria-expanded="true"] > div:nth-child(2) > div > div:first-child p:last-child {
+    font-size: 0.7rem !important;
+  }
+
+  #find-my-place article .grid-cols-4 > a,
+  #find-my-place article .grid-cols-3 > a {
+    font-size: 8px !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .catalogue-shell,
   .catalogue-card-enter {
