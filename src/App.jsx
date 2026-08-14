@@ -16,13 +16,14 @@ import { VERIFIED_VENUES } from './data/verifiedVenues';
 import { DAILY_VERIFIED_CAFES } from './data/dailyVerifiedCafes';
 import { CE_LA_VIE } from './data/ceLaVie';
 import { LOCAL_SCINDIA_HOUSE } from './data/localScindiaHouse';
+import { CP_SWIGGY_BATCH } from './data/cpSwiggyBatch';
 import { MapPin, Utensils, Globe, X, ShoppingBag } from 'lucide-react';
 
-const allCafes = [...cafesData, ...PREMIUM_CAFES, ...VERIFIED_VENUES, ...DAILY_VERIFIED_CAFES, ...CE_LA_VIE, ...LOCAL_SCINDIA_HOUSE];
+const allCafes = [...cafesData, ...PREMIUM_CAFES, ...VERIFIED_VENUES, ...DAILY_VERIFIED_CAFES, ...CE_LA_VIE, ...LOCAL_SCINDIA_HOUSE, ...CP_SWIGGY_BATCH];
 // RecommendationPlanner already has its own ranking logic. Feed it a neutral catalogue order
 // so legacy `isTopPick` flags cannot overpower the user's selected budget/location/vibe.
 // Premium and newly verified venues are included so the recommender can surface the broader price/area coverage.
-const recommendationCafes = [...CE_LA_VIE, ...LOCAL_SCINDIA_HOUSE, ...DAILY_VERIFIED_CAFES, ...VERIFIED_VENUES, ...PREMIUM_CAFES, ...cafesData].map(cafe => ({ ...cafe, isTopPick: false }));
+const recommendationCafes = [...CE_LA_VIE, ...LOCAL_SCINDIA_HOUSE, ...CP_SWIGGY_BATCH, ...DAILY_VERIFIED_CAFES, ...VERIFIED_VENUES, ...PREMIUM_CAFES, ...cafesData].map(cafe => ({ ...cafe, isTopPick: false }));
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -108,7 +109,7 @@ export default function App() {
             <div className="space-y-3 text-xs sm:text-sm text-[#5D4639] mb-8">
               {selectedCafe.whatToOrder && <div className="p-4 rounded-2xl bg-[#FCE6D0] border border-[#E7B894]"><span className="text-[#CC3A63] font-bold uppercase tracking-wider text-xs block mb-1">Recommended Order</span><p>{selectedCafe.whatToOrder}</p></div>}
               {selectedCafe.metroRoute && <div className="p-4 rounded-2xl bg-[#FCE6D0] border border-[#E7B894]"><span className="text-[#7A2E12] font-bold uppercase tracking-wider text-xs block mb-1">Getting There</span><p>{selectedCafe.metroRoute}</p></div>}
-              {selectedCafe.afterFood && <div className="p-4 rounded-2xl bg-[#FCE6D0] border border-[#E7B894]"><span className="text-[#7A2E12] font-bold uppercase tracking-wider text-xs block mb-1">Post-Meal Walk & Activity</span><p>{selectedCafe.afterFood}</p></div>}
+              {selectedCafe.afterFood && <div className="p-4 rounded-2xl bg-[#FCE6D0] border border-[#E7B894] border border-[#E7B894]"><span className="text-[#7A2E12] font-bold uppercase tracking-wider text-xs block mb-1">Post-Meal Walk & Activity</span><p>{selectedCafe.afterFood}</p></div>}
               {selectedCafe.curatorTake && <div className="p-4 rounded-2xl bg-[#7A2E12]/8 border border-[#E7B894] italic text-[#7A2E12]"><strong className="not-italic text-[#CC3A63] block mb-1">Avinash's Take:</strong>"{selectedCafe.curatorTake}"</div>}
             </div>
             <div className={`grid ${selectedCafe.dineoutUrl ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2 sm:grid-cols-3'} gap-2 pt-4 border-t border-[#E7B894]`}>
