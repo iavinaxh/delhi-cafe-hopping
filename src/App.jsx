@@ -13,13 +13,14 @@ import Footer from './components/Footer';
 import { cafesData } from './data/cafes';
 import { PREMIUM_CAFES } from './data/premiumCafes';
 import { VERIFIED_VENUES } from './data/verifiedVenues';
+import { DAILY_VERIFIED_CAFES } from './data/dailyVerifiedCafes';
 import { MapPin, Utensils, Globe, X, ShoppingBag } from 'lucide-react';
 
-const allCafes = [...cafesData, ...PREMIUM_CAFES, ...VERIFIED_VENUES];
+const allCafes = [...cafesData, ...PREMIUM_CAFES, ...VERIFIED_VENUES, ...DAILY_VERIFIED_CAFES];
 // RecommendationPlanner already has its own ranking logic. Feed it a neutral catalogue order
 // so legacy `isTopPick` flags cannot overpower the user's selected budget/location/vibe.
 // Premium and newly verified venues are included so the recommender can surface the broader price/area coverage.
-const recommendationCafes = [...VERIFIED_VENUES, ...PREMIUM_CAFES, ...cafesData].map(cafe => ({ ...cafe, isTopPick: false }));
+const recommendationCafes = [...DAILY_VERIFIED_CAFES, ...VERIFIED_VENUES, ...PREMIUM_CAFES, ...cafesData].map(cafe => ({ ...cafe, isTopPick: false }));
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
