@@ -1,4 +1,4 @@
-// Verified Connaught Place addition from user-supplied Swiggy Dineout listing, researched 14 Aug 2026.
+// Verified Connaught Place additions from user-supplied Swiggy Dineout listings, researched 14 Aug 2026.
 export const CP_SWIGGY_BATCH_4 = [
   {
     id: 'the-immigrant-cafe-cp',
@@ -20,5 +20,47 @@ export const CP_SWIGGY_BATCH_4 = [
     zomatoUrl: 'https://www.zomato.com/ncr/the-immigrant-cafe-1-connaught-place-new-delhi',
     swiggyUrl: 'https://www.swiggy.com/city/delhi/the-immigrant-cafe-connaught-place-rest992967',
     dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/connaught-place/the-immigrant-cafe-602872/dineout'
+  },
+  {
+    id: 'brew-bites-cp',
+    name: 'Brew & Bites',
+    zone: 'Connaught Place / C Block',
+    cuisine: 'Italian',
+    budget: '₹1,200 for 2',
+    budgetPerPerson: '₹600 per person',
+    budgetCategory: 'mid-range',
+    bestFor: 'Casual Italian meals, coffee and relaxed cafe dates in central CP',
+    vibeTag: 'Casual Dining',
+    isTopPick: false,
+    quickPickLabel: 'Italian Cafe',
+    whatToOrder: 'Italian mains, pasta or pizza with coffee; verify the current menu before ordering because the supplied Dineout listing is the strongest current source for this outlet.',
+    metroRoute: 'Rajiv Chowk Metro is the practical metro access for Connaught Place; the outlet is at Ground Floor, Radial Road, C-19, Block C.',
+    afterFood: 'Walk the C Block and Inner Circle, then continue toward Janpath or the central Connaught Place promenade.',
+    curatorTake: 'A useful lower-mid CP addition because it gives the catalogue a clearly Italian-focused option without duplicating the bigger bar-and-nightlife venues.',
+    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Brew+%26+Bites,+C-19,+Block+C,+Connaught+Place,+New+Delhi+110001',
+    zomatoUrl: 'https://www.zomato.com/ncr/brew-bites-connaught-place-new-delhi',
+    swiggyUrl: 'https://www.swiggy.com/city/delhi/brew-and-bites-connaught-place-rest1195903',
+    dineoutUrl: 'https://www.swiggy.com/restaurants/noida-1/connaught-place/brew-bites-1195903/dineout'
+  },
+  {
+    id: 'shake-square-cp',
+    name: 'Shake Square',
+    zone: 'Connaught Place / A Block',
+    cuisine: 'Beverages, Fast Food, Desserts',
+    budget: '₹500 for 2',
+    budgetPerPerson: '₹250 per person',
+    budgetCategory: 'budget',
+    bestFor: 'Milkshakes, quick snacks, desserts and very low-cost casual stops in CP',
+    vibeTag: 'Quick & Casual',
+    isTopPick: false,
+    quickPickLabel: 'Shakes & Snacks',
+    whatToOrder: 'Butterscotch Milk Shake, Chocolate Shake, Brownie Fudge Milkshake, Veg Sandwich, Pizza Sandwich or Penne Arrabiata are current listed favourites.',
+    metroRoute: 'Rajiv Chowk Metro is the practical metro access for Connaught Place; the supplied outlet is at C-24/2, Middle Circle, Connaught Place.',
+    afterFood: 'Walk the Inner Circle and nearby market lanes, or continue toward Janpath for a longer evening stroll.',
+    curatorTake: 'This is genuinely budget-focused. Swiggy Dineout currently lists ₹500 for two, making it useful for users who want a cheap snack or dessert rather than a full restaurant dinner.',
+    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Shake+Square,+C-24%2F2,+Middle+Circle,+Connaught+Place,+New+Delhi+110001',
+    zomatoUrl: 'https://www.zomato.com/ncr/shake-square-connaught-place-new-delhi',
+    swiggyUrl: 'https://www.swiggy.com/city/delhi/shake-square-c-block-connaught-place-rest9056',
+    dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/connaught-place/shake-square-9056/dineout'
   }
 ];
