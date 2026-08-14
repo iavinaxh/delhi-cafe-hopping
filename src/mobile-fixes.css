@@ -1,0 +1,115 @@
+/* Mobile-only stability layer. Keep the desktop layout untouched. */
+@media (max-width: 767px) {
+  html, body, #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Avoid expensive blur/paint work on small devices. */
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  [class*="backdrop-blur-"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Touch devices should never get the desktop hover lift. */
+  #find-my-place article:hover {
+    transform: none !important;
+  }
+
+  #find-my-place article {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  #find-my-place article h4,
+  #find-my-place article p,
+  #find-my-place article span {
+    overflow-wrap: anywhere;
+  }
+
+  #find-my-place article > div:first-child .shrink-0 {
+    max-width: 34%;
+  }
+
+  /* Keep recommendation action buttons usable on narrow screens. */
+  #find-my-place article .grid-cols-4,
+  #find-my-place article .grid-cols-3 {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #find-my-place article .grid-cols-4 > a,
+  #find-my-place article .grid-cols-3 > a {
+    min-width: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+    white-space: nowrap;
+  }
+
+  /* Make the hero illustration/search row fit 320px phones. */
+  .hero-search-row {
+    min-width: 0;
+  }
+
+  .hero-search-button {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-support-search {
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* The sticky header should not consume the whole first viewport. */
+  header.sticky {
+    max-width: 100vw;
+  }
+
+  /* Prevent accidental horizontal expansion from long venue names/URLs. */
+  main, section, article, form, header, footer {
+    max-width: 100%;
+  }
+
+  /* Disable non-essential entrance animations on mobile for smoother scrolling. */
+  .catalogue-shell,
+  .catalogue-card-enter {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 420px) {
+  /* Give the smallest phones a little more breathing room. */
+  #find-my-place article > div:first-child {
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+  }
+
+  #find-my-place article > div:last-child {
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+  }
+
+  #find-my-place article .grid-cols-4,
+  #find-my-place article .grid-cols-3 {
+    gap: 5px !important;
+  }
+
+  #find-my-place article .grid-cols-4 > a,
+  #find-my-place article .grid-cols-3 > a {
+    font-size: 8px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalogue-shell,
+  .catalogue-card-enter {
+    animation: none !important;
+  }
+}
