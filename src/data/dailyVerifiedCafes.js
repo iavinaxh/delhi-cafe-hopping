@@ -3,154 +3,36 @@
 // Cuisine is retained as metadata; the current UI does not render a dedicated cuisine field.
 export const DAILY_VERIFIED_CAFES = [
   {
-    id: 'indian-accent-lodhi-road',
-    name: 'Indian Accent',
-    zone: 'Lodhi Road / Central Delhi',
-    cuisine: 'Modern Indian, North Indian, Beverages',
-    budget: '₹6,000 for 2',
-    budgetPerPerson: '₹3,000 per person',
-    budgetCategory: 'high-end',
-    bestFor: 'Luxury modern Indian dining, tasting-menu experience and sophisticated date nights',
-    vibeTag: 'Quiet & Classy',
-    isTopPick: false,
-    quickPickLabel: 'High-End Experience',
-    whatToOrder: 'Chef tasting menu for a first visit; current listings also highlight Sweet Corn Shorba, Mushroom Kulcha, Doda Barfi and Butter Chicken Kulcha.',
-    metroRoute: 'JLN Stadium Metro is the nearest metro station, about 0.66 km away; the restaurant is at The Lodhi on Lodhi Road.',
-    afterFood: 'Lodhi Road and the Lodhi Gardens area are natural post-meal options for a relaxed walk, subject to opening hours and weather.',
-    curatorTake: 'A genuine high-end addition rather than another mid-range cafe. The current dining estimate is ₹6,000 for two without alcohol, so this belongs in the premium special-occasion tier.',
-    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Indian+Accent,+The+Lodhi,+Lodhi+Road,+New+Delhi+110003',
-    zomatoUrl: 'https://www.zomato.com/ncr/indian-accent-lodhi-road-new-delhi/info',
-    swiggyUrl: 'https://www.swiggy.com/city/delhi/indian-accent-the-lodhi-lodhi-road-rest1355638',
-    dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/lodhi-road/indian-accent-1355638/dineout',
-    websiteUrl: 'https://www.indianaccent.com/newdelhi/index.php'
+    id: 'indian-accent-lodhi-road', name: 'Indian Accent', zone: 'Lodhi Road / Central Delhi', cuisine: 'Modern Indian, North Indian, Beverages', budget: '₹6,000 for 2', budgetPerPerson: '₹3,000 per person', budgetCategory: 'high-end', bestFor: 'Luxury modern Indian dining, tasting-menu experience and sophisticated date nights', vibeTag: 'Quiet & Classy', isTopPick: false, quickPickLabel: 'High-End Experience', whatToOrder: 'Chef tasting menu for a first visit; current listings also highlight Sweet Corn Shorba, Mushroom Kulcha, Doda Barfi and Butter Chicken Kulcha.', metroRoute: 'JLN Stadium Metro is the nearest metro station, about 0.66 km away; the restaurant is at The Lodhi on Lodhi Road.', afterFood: 'Lodhi Road and the Lodhi Gardens area are natural post-meal options for a relaxed walk, subject to opening hours and weather.', curatorTake: 'A genuine high-end addition rather than another mid-range cafe. The current dining estimate is ₹6,000 for two without alcohol, so this belongs in the premium special-occasion tier.', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Indian+Accent,+The+Lodhi,+Lodhi+Road,+New+Delhi+110003', zomatoUrl: 'https://www.zomato.com/ncr/indian-accent-lodhi-road-new-delhi/info', swiggyUrl: 'https://www.swiggy.com/city/delhi/indian-accent-the-lodhi-lodhi-road-rest1355638', dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/lodhi-road/indian-accent-1355638/dineout', websiteUrl: 'https://www.indianaccent.com/newdelhi/index.php'
   },
   {
-    id: 'carnatic-cafe-lodhi-colony',
-    name: 'Carnatic Cafe',
-    zone: 'Lodhi Colony / Meharchand Market',
-    cuisine: 'South Indian, Beverages',
-    budget: '₹800 for 2',
-    budgetPerPerson: '₹400 per person',
-    budgetCategory: 'budget',
-    bestFor: 'Vegetarian South Indian food, dosas and a calm, cosy cafe setting',
-    vibeTag: 'Quiet & Classy',
-    isTopPick: false,
-    quickPickLabel: 'Budget South Indian',
-    whatToOrder: 'Malleshwari Dosa, Obbattu, Benne Khali Dosa, Manina Maga Dosa or Raagi Masala Dosa.',
-    metroRoute: 'Jawaharlal Nehru Stadium Metro is the nearest metro station for the Lodhi Road/Meharchand Market area; the outlet is at 84-85 Meharchand Market.',
-    afterFood: 'Walk through Meharchand Market and the nearby Lodhi Colony/Lodhi Road area.',
-    curatorTake: 'This fills the budget and South Indian gap without pretending ₹1,000 is the upper limit for the catalogue.',
-    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Carnatic+Cafe,+84-85+Meharchand+Market,+Lodhi+Road,+New+Delhi',
-    zomatoUrl: 'https://www.zomato.com/ncr/carnatic-cafe-lodhi-colony-new-delhi/info',
-    swiggyUrl: 'https://www.swiggy.com/city/delhi/carnatic-cafe-lodhi-colony-lodi-colony-rest291872',
-    dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/lodi-colony/carnatic-cafe-291872/dineout'
+    id: 'carnatic-cafe-lodhi-colony', name: 'Carnatic Cafe', zone: 'Lodhi Colony / Meharchand Market', cuisine: 'South Indian, Beverages', budget: '₹800 for 2', budgetPerPerson: '₹400 per person', budgetCategory: 'budget', bestFor: 'Vegetarian South Indian food, dosas and a calm, cosy cafe setting', vibeTag: 'Quiet & Classy', isTopPick: false, quickPickLabel: 'Budget South Indian', whatToOrder: 'Malleshwari Dosa, Obbattu, Benne Khali Dosa, Manina Maga Dosa or Raagi Masala Dosa.', metroRoute: 'Jawaharlal Nehru Stadium Metro is the nearest metro station for the Lodhi Road/Meharchand Market area; the outlet is at 84-85 Meharchand Market.', afterFood: 'Walk through Meharchand Market and the nearby Lodhi Colony/Lodhi Road area.', curatorTake: 'This fills the budget and South Indian gap without pretending ₹1,000 is the upper limit for the catalogue.', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Carnatic+Cafe,+84-85+Meharchand+Market,+Lodhi+Road,+New+Delhi', zomatoUrl: 'https://www.zomato.com/ncr/carnatic-cafe-lodhi-colony-new-delhi/info', swiggyUrl: 'https://www.swiggy.com/city/delhi/carnatic-cafe-lodhi-colony-lodi-colony-rest291872', dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/lodi-colony/carnatic-cafe-291872/dineout'
   },
   {
-    id: 'comorin-gurgaon-golf-course-road',
-    name: 'Comorin',
-    zone: 'Gurgaon / Golf Course Road',
-    cuisine: 'North Indian, Modern Indian, South Indian, Seafood, Desserts',
-    budget: '₹3,000 for 2',
-    budgetPerPerson: '₹1,500 per person',
-    budgetCategory: 'upper-mid',
-    bestFor: 'Modern Indian dining, regional flavours and a polished Golf Course Road dinner',
-    vibeTag: 'Proper Dinner',
-    isTopPick: false,
-    quickPickLabel: 'Upper-Mid Gurgaon',
-    whatToOrder: 'Gunpowder Idli, Sev Puri, Champaran Style Mutton, Haleem or a large plate such as Chicken Pepper Fry with Malabar Parotta. The current Zomato estimate is ₹3,000 for two without alcohol.',
-    metroRoute: 'Sector 53-54 Metro Station is the closest listed metro option, about 0.41 km from Two Horizon Center; continue to 101, First Floor, Two Horizon Center, Golf Course Road.',
-    afterFood: 'Golf Course Road and the Two Horizon Center area are suitable for a short post-dinner walk before heading back.',
-    curatorTake: 'A useful Gurgaon addition at a real upper-mid price point. Current listings show ₹3,000 for two without alcohol, while Swiggy also confirms the same outlet and live menu.',
-    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Comorin,+101+First+Floor,+Two+Horizon+Center,+Golf+Course+Road,+Gurugram',
-    zomatoUrl: 'https://www.zomato.com/ncr/comorin-golf-course-road-gurgaon/info',
-    swiggyUrl: 'https://www.swiggy.com/city/gurgaon/comorin-golf-course-road-rest351990',
-    dineoutUrl: 'https://www.swiggy.com/restaurants/gurgaon/golf-course-road/comorin-351990/dineout',
-    websiteUrl: 'https://www.comorin.in/'
+    id: 'comorin-gurgaon-golf-course-road', name: 'Comorin', zone: 'Gurgaon / Golf Course Road', cuisine: 'North Indian, Modern Indian, South Indian, Seafood, Desserts', budget: '₹3,000 for 2', budgetPerPerson: '₹1,500 per person', budgetCategory: 'upper-mid', bestFor: 'Modern Indian dining, regional flavours and a polished Golf Course Road dinner', vibeTag: 'Proper Dinner', isTopPick: false, quickPickLabel: 'Upper-Mid Gurgaon', whatToOrder: 'Gunpowder Idli, Sev Puri, Champaran Style Mutton, Haleem or a large plate such as Chicken Pepper Fry with Malabar Parotta. The current Zomato estimate is ₹3,000 for two without alcohol.', metroRoute: 'Sector 53-54 Metro Station is the closest listed metro option, about 0.41 km from Two Horizon Center; continue to 101, First Floor, Two Horizon Center, Golf Course Road.', afterFood: 'Golf Course Road and the Two Horizon Center area are suitable for a short post-dinner walk before heading back.', curatorTake: 'A useful Gurgaon addition at a real upper-mid price point. Current listings show ₹3,000 for two without alcohol, while Swiggy also confirms the same outlet and live menu.', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Comorin,+101+First+Floor,+Two+Horizon+Center,+Golf+Course+Road,+Gurugram', zomatoUrl: 'https://www.zomato.com/ncr/comorin-golf-course-road-gurgaon/info', swiggyUrl: 'https://www.swiggy.com/city/gurgaon/comorin-golf-course-road-rest351990', dineoutUrl: 'https://www.swiggy.com/restaurants/gurgaon/golf-course-road/comorin-351990/dineout', websiteUrl: 'https://www.comorin.in/'
   },
   {
-    id: 'burma-burma-noida-sector-18',
-    name: 'Burma Burma - Noida',
-    zone: 'Noida Sector 18 / DLF Mall of India',
-    cuisine: 'Asian, Burmese, Bubble Tea, Beverages, Desserts',
-    budget: '₹1,800 for 2',
-    budgetPerPerson: '₹900 per person',
-    budgetCategory: 'mid-range',
-    bestFor: 'Burmese cuisine, vegetarian-friendly dining and a mall date around Sector 18',
-    vibeTag: 'Casual Dining',
-    isTopPick: false,
-    quickPickLabel: 'Burmese Food',
-    whatToOrder: 'Tea Leaf Salad, Samuza Hincho and Burmese Khowsuey; Bubble Tea is also listed among the popular dishes.',
-    metroRoute: 'Noida Sector 18 Metro Station is about 0.40 km from DLF Mall of India; the restaurant is on the third floor at D-4208, DLF Mall of India.',
-    afterFood: 'DLF Mall of India shopping and the surrounding Sector 18 area give you an easy post-meal activity without another drive.',
-    curatorTake: 'This adds a clearly different Burmese cuisine profile and strengthens Noida coverage at a mid-range price rather than another generic cafe.',
-    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Burma+Burma,+DLF+Mall+of+India,+Sector+18,+Noida',
-    zomatoUrl: 'https://www.zomato.com/ncr/burma-burma-sector-18-noida/info',
-    swiggyUrl: 'https://www.swiggy.com/city/noida-1/burma-burma-noida-sector-18-rest78626',
-    dineoutUrl: 'https://www.swiggy.com/restaurants/noida-1/sector-18/burma-burma-noida-78626/dineout',
-    websiteUrl: 'https://burmaburma.in/noida'
+    id: 'burma-burma-noida-sector-18', name: 'Burma Burma - Noida', zone: 'Noida Sector 18 / DLF Mall of India', cuisine: 'Asian, Burmese, Bubble Tea, Beverages, Desserts', budget: '₹1,800 for 2', budgetPerPerson: '₹900 per person', budgetCategory: 'mid-range', bestFor: 'Burmese cuisine, vegetarian-friendly dining and a mall date around Sector 18', vibeTag: 'Casual Dining', isTopPick: false, quickPickLabel: 'Burmese Food', whatToOrder: 'Tea Leaf Salad, Samuza Hincho and Burmese Khowsuey; Bubble Tea is also listed among the popular dishes.', metroRoute: 'Noida Sector 18 Metro Station is about 0.40 km from DLF Mall of India; the restaurant is on the third floor at D-4208, DLF Mall of India.', afterFood: 'DLF Mall of India shopping and the surrounding Sector 18 area give you an easy post-meal activity without another drive.', curatorTake: 'This adds a clearly different Burmese cuisine profile and strengthens Noida coverage at a mid-range price rather than another generic cafe.', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Burma+Burma,+DLF+Mall+of+India,+Sector+18,+Noida', zomatoUrl: 'https://www.zomato.com/ncr/burma-burma-sector-18-noida/info', swiggyUrl: 'https://www.swiggy.com/city/noida-1/burma-burma-noida-sector-18-rest78626', dineoutUrl: 'https://www.swiggy.com/restaurants/noida-1/sector-18/burma-burma-noida-78626/dineout', websiteUrl: 'https://burmaburma.in/noida'
   },
   {
-    id: 'bukhara-itc-maurya-chanakyapuri',
-    name: 'Bukhara - ITC Maurya',
-    zone: 'Chanakyapuri / ITC Maurya',
-    cuisine: 'North Indian, Kebab, Desserts, Mughlai',
-    budget: '₹8,000 for 2',
-    budgetPerPerson: '₹4,000 per person',
-    budgetCategory: 'high-end',
-    bestFor: 'Iconic North-West Frontier cuisine, luxury dining and a landmark special occasion',
-    vibeTag: 'Quiet & Classy',
-    isTopPick: false,
-    quickPickLabel: 'Luxury Landmark',
-    whatToOrder: 'Dal Bukhara, Sikanderi Raan, Tandoori Phool, Murgh Malai Kebab, Onion Kulcha or Tandoori Jhinga. Current listings put the dining estimate at ₹8,000 for two without alcohol.',
-    metroRoute: 'Durgabai Deshmukh South Campus Metro is the nearest listed metro station, about a 14-minute walk; the restaurant is inside ITC Maurya, Chanakyapuri.',
-    afterFood: 'Chanakyapuri is better suited to a short hotel-area drive or quiet evening than a long market walk; plan the return route around the reservation.',
-    curatorTake: 'This is intentionally high-end. Bukhara gives the catalogue a genuine luxury North Indian option and prevents the recommender from treating ₹1,000 as a ceiling.',
-    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Bukhara,+ITC+Maurya,+Sardar+Patel+Marg,+Chanakyapuri,+New+Delhi',
-    zomatoUrl: 'https://www.zomato.com/ncr/bukhara-itc-maurya-chanakyapuri-new-delhi/info',
-    swiggyUrl: 'https://www.swiggy.com/city/delhi/bukhara-itc-maurya-chanakyapuri-rest1083579',
-    dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/chanakyapuri/bukhara-itc-maurya-1083579/dineout',
-    websiteUrl: 'https://www.itchotels.com/in/en/dining/bukhara'
+    id: 'bukhara-itc-maurya-chanakyapuri', name: 'Bukhara - ITC Maurya', zone: 'Chanakyapuri / ITC Maurya', cuisine: 'North Indian, Kebab, Desserts, Mughlai', budget: '₹8,000 for 2', budgetPerPerson: '₹4,000 per person', budgetCategory: 'high-end', bestFor: 'Iconic North-West Frontier cuisine, luxury dining and a landmark special occasion', vibeTag: 'Quiet & Classy', isTopPick: false, quickPickLabel: 'Luxury Landmark', whatToOrder: 'Dal Bukhara, Sikanderi Raan, Tandoori Phool, Murgh Malai Kebab, Onion Kulcha or Tandoori Jhinga. Current listings put the dining estimate at ₹8,000 for two without alcohol.', metroRoute: 'Durgabai Deshmukh South Campus Metro is the nearest listed metro station, about a 14-minute walk; the restaurant is inside ITC Maurya, Chanakyapuri.', afterFood: 'Chanakyapuri is better suited to a short hotel-area drive or quiet evening than a long market walk; plan the return route around the reservation.', curatorTake: 'This is intentionally high-end. Bukhara gives the catalogue a genuine luxury North Indian option and prevents the recommender from treating ₹1,000 as a ceiling.', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Bukhara,+ITC+Maurya,+Sardar+Patel+Marg,+Chanakyapuri,+New+Delhi', zomatoUrl: 'https://www.zomato.com/ncr/bukhara-itc-maurya-chanakyapuri-new-delhi/info', swiggyUrl: 'https://www.swiggy.com/city/delhi/bukhara-itc-maurya-chanakyapuri-rest1083579', dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/chanakyapuri/bukhara-itc-maurya-1083579/dineout', websiteUrl: 'https://www.itchotels.com/in/en/dining/bukhara'
   },
   {
-    id: 'the-mandi-chowk-connaught-place',
-    name: 'The Mandi Chowk - Biryani Kitchen',
-    zone: 'Connaught Place / Central Delhi',
-    cuisine: 'Mandi, Biryani, Arabian, Mughlai, Seafood, Kebab, Shawarma, North Indian',
-    budget: '₹1,400 for 2',
-    budgetPerPerson: '₹700 per person',
-    budgetCategory: 'mid-range',
-    bestFor: 'Mandi, biryani and Arabic-style grilled dishes in Connaught Place',
-    vibeTag: 'Casual Dining',
-    isTopPick: false,
-    quickPickLabel: 'Mandi & Biryani',
-    whatToOrder: 'Chicken or mutton mandi, Special Chicken Shawarma, Mandi Biryani, or seafood mandi options such as Prawns Special Mandi Biryani. Current Zomato pricing is ₹1,400 for two, while Swiggy Dineout currently displays an anomalous ₹100 figure, so the catalogue uses the more realistic ₹1,400 estimate.',
-    metroRoute: 'Rajiv Chowk Metro is the obvious metro access for Connaught Place; the outlet is at Premises 3/90, Block P, Connaught Place, on the first and second floors.',
-    afterFood: 'Walk around the Connaught Place inner and outer circles, or continue toward Janpath and nearby Central Delhi spots.',
-    curatorTake: 'A useful Central Delhi addition because it is specifically mandi/Arabic/Mughlai rather than another generic North Indian cafe. I rejected the ₹100 Dineout display as an unrealistic meal estimate and used the current Zomato figure instead.',
-    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=The+Mandi+Chowk+Biryani+Kitchen,+Premises+3%2F90,+Block+P,+Connaught+Place,+New+Delhi+110001',
-    zomatoUrl: 'https://www.zomato.com/ncr/the-mandi-chowk-biryani-kitchen-connaught-place-new-delhi/info',
-    swiggyUrl: 'https://www.swiggy.com/city/delhi/the-mandi-chowk-biryani-kitchen-connaught-place-rest1079873',
-    dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/connaught-place/the-mandi-chowk-1079873/dineout'
+    id: 'the-mandi-chowk-connaught-place', name: 'The Mandi Chowk - Biryani Kitchen', zone: 'Connaught Place / Central Delhi', cuisine: 'Mandi, Biryani, Arabian, Mughlai, Seafood, Kebab, Shawarma, North Indian', budget: '₹1,400 for 2', budgetPerPerson: '₹700 per person', budgetCategory: 'mid-range', bestFor: 'Mandi, biryani and Arabic-style grilled dishes in Connaught Place', vibeTag: 'Casual Dining', isTopPick: false, quickPickLabel: 'Mandi & Biryani', whatToOrder: 'Chicken or mutton mandi, Special Chicken Shawarma, Mandi Biryani, or seafood mandi options such as Prawns Special Mandi Biryani. Current Zomato pricing is ₹1,400 for two, while Swiggy Dineout currently displays an anomalous ₹100 figure, so the catalogue uses the more realistic ₹1,400 estimate.', metroRoute: 'Rajiv Chowk Metro is the obvious metro access for Connaught Place; the outlet is at Premises 3/90, Block P, Connaught Place, on the first and second floors.', afterFood: 'Walk around the Connaught Place inner and outer circles, or continue toward Janpath and nearby Central Delhi spots.', curatorTake: 'A useful Central Delhi addition because it is specifically mandi/Arabic/Mughlai rather than another generic North Indian cafe. I rejected the ₹100 Dineout display as an unrealistic meal estimate and used the current Zomato figure instead.', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=The+Mandi+Chowk+Biryani+Kitchen,+Premises+3%2F90,+Block+P,+Connaught+Place,+New+Delhi+110001', zomatoUrl: 'https://www.zomato.com/ncr/the-mandi-chowk-biryani-kitchen-connaught-place-new-delhi/info', swiggyUrl: 'https://www.swiggy.com/city/delhi/the-mandi-chowk-biryani-kitchen-connaught-place-rest1079873', dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/connaught-place/the-mandi-chowk-1079873/dineout'
   },
   {
-    id: 'ivoryy-fusion-bar-connaught-place',
-    name: 'Ivoryy Fusion Bar',
-    zone: 'Connaught Place / Central Delhi',
-    cuisine: 'Continental, North Indian, Asian, Bar Food, Modern Indian',
-    budget: '₹3,000–₹4,700 for 2',
-    budgetPerPerson: '₹1,500–₹2,350 per person',
-    budgetCategory: 'upper-mid',
-    bestFor: 'Fusion dining, cocktails, live music and a late-night CP date or group dinner',
-    vibeTag: 'Lively & Trendy',
-    isTopPick: false,
-    quickPickLabel: 'Fusion Night Out',
-    whatToOrder: 'Thai Basil Chicken Bao, Lamb Galouti Sliders and Butter Chicken Lasagna are current listed must-tries. Because current platforms disagree on the base estimate, check the live menu before ordering.',
-    metroRoute: 'Rajiv Chowk Metro is the nearest practical metro access for Connaught Place; the outlet is at F-60, 2nd Floor, Malhotra Building, Connaught Place.',
-    afterFood: 'Continue around the Connaught Place circles for a late-night walk, or head toward Janpath for more evening activity.',
-    curatorTake: 'This is not a cheap cafe. Swiggy Dineout currently shows ₹1,800 for two, while Zomato shows ₹3,000 and a newer Zomato info listing shows ₹4,700. I have kept a ₹3,000–₹4,700 catalogue range instead of presenting the cheapest platform figure as the true expected bill.',
-    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Ivoryy+Fusion+Bar,+F-60,+2nd+Floor,+Malhotra+Building,+Connaught+Place,+New+Delhi+110001',
-    zomatoUrl: 'https://www.zomato.com/ncr/ivoryy-fusion-bar-connaught-place-new-delhi/info',
-    swiggyUrl: 'https://www.swiggy.com/city/delhi/ivoryy-fusion-bar-connaught-place-rest1276546',
-    dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/connaught-place/ivoryy-fusion-bar-1078460/dineout'
+    id: 'ivoryy-fusion-bar-connaught-place', name: 'Ivoryy Fusion Bar', zone: 'Connaught Place / Central Delhi', cuisine: 'Continental, North Indian, Asian, Bar Food, Modern Indian', budget: '₹3,000–₹4,700 for 2', budgetPerPerson: '₹1,500–₹2,350 per person', budgetCategory: 'upper-mid', bestFor: 'Fusion dining, cocktails, live music and a late-night CP date or group dinner', vibeTag: 'Lively & Trendy', isTopPick: false, quickPickLabel: 'Fusion Night Out', whatToOrder: 'Thai Basil Chicken Bao, Lamb Galouti Sliders and Butter Chicken Lasagna are current listed must-tries. Because current platforms disagree on the base estimate, check the live menu before ordering.', metroRoute: 'Rajiv Chowk Metro is the nearest practical metro access for Connaught Place; the outlet is at F-60, 2nd Floor, Malhotra Building, Connaught Place.', afterFood: 'Continue around the Connaught Place circles for a late-night walk, or head toward Janpath for more evening activity.', curatorTake: 'This is not a cheap cafe. Swiggy Dineout currently shows ₹1,800 for two, while Zomato shows ₹3,000 and a newer Zomato info listing shows ₹4,700. I have kept a ₹3,000–₹4,700 catalogue range instead of presenting the cheapest platform figure as the true expected bill.', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Ivoryy+Fusion+Bar,+F-60,+2nd+Floor,+Malhotra+Building,+Connaught+Place,+New+Delhi+110001', zomatoUrl: 'https://www.zomato.com/ncr/ivoryy-fusion-bar-connaught-place-new-delhi/info', swiggyUrl: 'https://www.swiggy.com/city/delhi/ivoryy-fusion-bar-connaught-place-rest1276546', dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/connaught-place/ivoryy-fusion-bar-1078460/dineout'
+  },
+  {
+    id: 'kala-swasti-janpath', name: 'Kala Swasti', zone: 'Janpath / Connaught Place', cuisine: 'North Indian, Continental, Desserts', budget: '₹2,000–₹2,800 for 2', budgetPerPerson: '₹1,000–₹1,400 per person', budgetCategory: 'upper-mid', bestFor: 'Artistic setting, North Indian dining, open-air seating and relaxed evenings', vibeTag: 'Quiet & Classy', isTopPick: false, quickPickLabel: 'Artistic Dining', whatToOrder: 'Tandoori Chicken and Shahi Paneer are listed among the popular dishes; the menu also spans North Indian and Continental plates.', metroRoute: 'Janpath Metro / Rajiv Chowk are the practical metro options; the restaurant is inside the Indira Gandhi National Centre for the Arts near Western Court, Janpath.', afterFood: 'Walk along Janpath and Connaught Place, or continue toward India Gate if you want a longer evening drive.', curatorTake: 'Pricing is inconsistent across current listings: Swiggy Dineout shows ₹1,000 for two, while Zomato lists ₹2,000 and another current Zomato page lists ₹2,800 for the same Janpath venue. I use a ₹2,000–₹2,800 range so the catalogue does not understate the likely dining bill.', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Kala+Swasti,+Indira+Gandhi+National+Centre+for+the+Arts,+Janpath,+New+Delhi+110001', zomatoUrl: 'https://www.zomato.com/ncr/kala-swasti-1-janpath-new-delhi', swiggyUrl: 'https://www.swiggy.com/city/delhi/kala-swasti-connaught-place-rest976605', dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/connaught-place/kala-swasti-976605/dineout'
+  },
+  {
+    id: 'youmee-dwarka-sector-14', name: 'YouMee', zone: 'Dwarka Sector 14 / Vegas Mall', cuisine: 'Asian, Japanese, Sushi, Thai, Pan-Asian, Desserts, Beverages', budget: '₹2,100–₹3,000 for 2', budgetPerPerson: '₹1,050–₹1,500 per person', budgetCategory: 'upper-mid', bestFor: 'Japanese and Pan-Asian food, sushi and ramen in a lively manga-inspired mall setting', vibeTag: 'Lively & Trendy', isTopPick: false, quickPickLabel: 'Sushi & Ramen', whatToOrder: 'YouMee Signature Ramen, Yasai Tempura Sushi Roll, Rock Corn Tempura and Kung Pao Chicken are current Swiggy Dineout popular dishes; the menu also has dim sum, baos and ramen.', metroRoute: 'Dwarka Sector 14 Metro is the natural metro access for Vegas Mall; the restaurant is at Plot 6, Pocket 1, Sector 14 Dwarka, on the fifth floor of Vegas Mall.', afterFood: 'Vegas Mall is the easiest post-meal option for shopping, a movie or a short indoor walk.', curatorTake: 'Swiggy Dineout currently shows ₹2,100 for two, while Zomato lists ₹3,000. That spread is too large to hide, so the catalogue uses a range rather than claiming one exact bill.', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=YouMee,+Vegas+Mall,+Plot+6,+Pocket+1,+Sector+14,+Dwarka,+New+Delhi+110078', zomatoUrl: 'https://www.zomato.com/ncr/you-mee-sector-14-dwarka-new-delhi', swiggyUrl: 'https://www.swiggy.com/city/delhi/youmee-dwarka-sector-14-dwarka-rest967588', dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/dwarka/youmee-978855/dineout'
+  },
+  {
+    id: 'pulp-the-delicacy-connaught-place', name: 'Pulp The Delicacy', zone: 'Connaught Place / D Block', cuisine: 'American, North Indian, Chinese, Continental, Italian, Mughlai, Multi Cuisine', budget: '₹1,200 for 2', budgetPerPerson: '₹600 per person', budgetCategory: 'mid-range', bestFor: 'Casual multi-cuisine meals, mocktails and group-friendly dining in CP', vibeTag: 'Casual Dining', isTopPick: false, quickPickLabel: 'Multi-Cuisine', whatToOrder: 'The current Swiggy menu highlights Spectacular Sunsets combo meals, Manchow Soup, Chicken Tikka and Chicken Malai Tikka; mocktails such as Apple Lemonade and Classic Virgin Mojito are also listed.', metroRoute: 'Rajiv Chowk Metro is the nearest practical metro access; the outlet is at Plot 26-D, Ground Floor, Rajiv Chowk, D Block, Connaught Place.', afterFood: 'Walk around the D Block and Inner Circle of Connaught Place, with Janpath as an easy extension.', curatorTake: 'This fills a straightforward mid-range multi-cuisine slot in CP. Current Swiggy Dineout and delivery listings both show ₹1,200 for two, so there is less pricing ambiguity here than with some of the other new additions.', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Pulp+The+Delicacy,+Plot+26-D,+Ground+Floor,+Rajiv+Chowk,+D+Block,+Connaught+Place,+New+Delhi', zomatoUrl: 'https://www.zomato.com/ncr/pulp-the-delicacy-connaught-place-new-delhi', swiggyUrl: 'https://www.swiggy.com/city/delhi/pulp-the-delicacy-connaught-place-rest993629', dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/connaught-place/pulp-the-delicacy-1000153/dineout'
+  },
+  {
+    id: 'massala-singh-connaught-place', name: 'Massala Singh', zone: 'Connaught Place / K Block', cuisine: 'North Indian, Modern Indian, Mughlai, Chinese, Indo-Chinese, Punjabi, Asian', budget: '₹1,600 for 2', budgetPerPerson: '₹800 per person', budgetCategory: 'mid-range', bestFor: 'North Indian and Mughlai comfort food, group dinners and CP evenings', vibeTag: 'Proper Dinner', isTopPick: false, quickPickLabel: 'North Indian Dinner', whatToOrder: 'MS Dal Makhani, Pindi De Chole, Paneer Makhani, Paneer Lababdar, Bhuna Palak Paneer or Butter Chicken. Current listings also show Parantha and Veg Afghani Momo among popular choices.', metroRoute: 'Rajiv Chowk Metro is the nearest practical metro access; the outlet is at K-14, Outer Circle, Block K, Connaught Place.', afterFood: 'Continue around Connaught Place, or walk toward Janpath for shops, cafes and evening activity.', curatorTake: 'Swiggy Dineout shows ₹950 for two, while Zomato and District both show ₹1,600. I use ₹1,600 as the catalogue dining estimate because it is the more consistent current dine-in figure across independent listings.', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Massala+Singh,+K-14,+Outer+Circle,+Block+K,+Connaught+Place,+New+Delhi+110001', zomatoUrl: 'https://www.zomato.com/ncr/massala-singh-1-connaught-place-new-delhi/info', swiggyUrl: 'https://www.swiggy.com/city/delhi/massala-singh-connaught-place-rest1207726', dineoutUrl: 'https://www.swiggy.com/restaurants/delhi/connaught-place/massala-singh-masala-singh-cp-1088055/dineout'
   }
 ];
