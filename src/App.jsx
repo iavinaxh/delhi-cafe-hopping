@@ -18,10 +18,11 @@ import { CE_LA_VIE } from './data/ceLaVie';
 import { LOCAL_SCINDIA_HOUSE } from './data/localScindiaHouse';
 import { CP_SWIGGY_BATCH } from './data/cpSwiggyBatch';
 import { CP_SWIGGY_BATCH_2 } from './data/cpSwiggyBatch2';
+import { CP_SWIGGY_BATCH_3 } from './data/cpSwiggyBatch3';
 import { MapPin, Utensils, Globe, X, ShoppingBag } from 'lucide-react';
 
-const allCafes = [...cafesData, ...PREMIUM_CAFES, ...VERIFIED_VENUES, ...DAILY_VERIFIED_CAFES, ...CE_LA_VIE, ...LOCAL_SCINDIA_HOUSE, ...CP_SWIGGY_BATCH, ...CP_SWIGGY_BATCH_2];
-const recommendationCafes = [...CE_LA_VIE, ...LOCAL_SCINDIA_HOUSE, ...CP_SWIGGY_BATCH_2, ...CP_SWIGGY_BATCH, ...DAILY_VERIFIED_CAFES, ...VERIFIED_VENUES, ...PREMIUM_CAFES, ...cafesData].map(cafe => ({ ...cafe, isTopPick: false }));
+const allCafes = [...cafesData, ...PREMIUM_CAFES, ...VERIFIED_VENUES, ...DAILY_VERIFIED_CAFES, ...CE_LA_VIE, ...LOCAL_SCINDIA_HOUSE, ...CP_SWIGGY_BATCH, ...CP_SWIGGY_BATCH_2, ...CP_SWIGGY_BATCH_3];
+const recommendationCafes = [...CE_LA_VIE, ...LOCAL_SCINDIA_HOUSE, ...CP_SWIGGY_BATCH_3, ...CP_SWIGGY_BATCH_2, ...CP_SWIGGY_BATCH, ...DAILY_VERIFIED_CAFES, ...VERIFIED_VENUES, ...PREMIUM_CAFES, ...cafesData].map(cafe => ({ ...cafe, isTopPick: false }));
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
