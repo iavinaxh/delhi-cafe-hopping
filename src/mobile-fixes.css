@@ -1,3 +1,69 @@
+@media (min-width: 768px) and (max-width: 1100px) {
+  header.sticky > div > div:first-child {
+    gap: 6px !important;
+  }
+
+  header.sticky > div > div:first-child > button:first-child {
+    flex: 0 0 158px !important;
+    width: 158px !important;
+    min-width: 158px !important;
+    gap: 8px !important;
+  }
+
+  header.sticky > div > div:first-child > button:first-child > div:last-child {
+    width: 108px !important;
+    min-width: 108px !important;
+    max-width: 108px !important;
+  }
+
+  header.sticky > div > div:first-child > button:first-child > div:last-child > span {
+    white-space: nowrap !important;
+    display: block !important;
+    font-size: 1.25rem !important;
+    line-height: 1.1 !important;
+  }
+
+  header.sticky > div > div:first-child > button:first-child > div:last-child > p {
+    display: none !important;
+  }
+
+  header.sticky nav {
+    gap: 0 !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    justify-content: center !important;
+  }
+
+  header.sticky nav > button {
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+    padding-top: 9px !important;
+    padding-bottom: 9px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+    gap: 5px !important;
+  }
+
+  header.sticky nav > button:first-child {
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+  }
+
+  header.sticky > div > div:first-child > div:last-child {
+    flex: 0 0 auto !important;
+    gap: 5px !important;
+  }
+
+  header.sticky > div > div:first-child > div:last-child > button:first-child {
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+  }
+
+  header.sticky > div > div:first-child > div:last-child > button:first-child > span {
+    display: inline !important;
+  }
+}
+
 @media (max-width: 767px) {
   html,
   body,
