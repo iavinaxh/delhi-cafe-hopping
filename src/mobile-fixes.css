@@ -42,45 +42,54 @@
   #find-my-place form > div > div { min-width: 0; max-width: 100%; }
 
   #find-my-place form > div > div:nth-child(6) {
-    display: grid !important;
-    grid-template-columns: 42px minmax(0, 1fr) !important;
+    display: flex !important;
+    flex-direction: row !important;
     align-items: center !important;
-    column-gap: 12px !important;
+    gap: 12px !important;
     min-height: 0 !important;
     height: auto !important;
     width: 100% !important;
     padding: 14px 16px !important;
     border-radius: 18px !important;
     box-sizing: border-box !important;
+    text-align: left !important;
   }
 
   #find-my-place form > div > div:nth-child(6) > div:first-child {
-    grid-column: 1 !important;
-    width: 42px !important;
-    max-width: 42px !important;
-    min-width: 42px !important;
-    flex: none !important;
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    max-width: 40px !important;
+    min-width: 40px !important;
   }
 
   #find-my-place form > div > div:nth-child(6) > div:last-child {
-    grid-column: 2 !important;
-    width: 100% !important;
+    flex: 1 1 0% !important;
+    width: 0 !important;
     min-width: 0 !important;
     max-width: none !important;
-    flex: none !important;
+    text-align: left !important;
+    display: block !important;
   }
 
   #find-my-place form > div > div:nth-child(6) > div:last-child p {
+    display: block !important;
     width: 100% !important;
-    max-width: none !important;
+    max-width: 100% !important;
     min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     overflow-wrap: normal !important;
     word-break: normal !important;
+    text-align: left !important;
     white-space: normal !important;
   }
 
   #find-my-place form > div > div:nth-child(6) > div:last-child p:first-child {
     white-space: nowrap !important;
+  }
+
+  #find-my-place form > div > div:nth-child(6) > div:last-child p:nth-child(2) {
+    white-space: normal !important;
   }
 
   .catalogue-shell { animation: none !important; opacity: 1 !important; transform: none !important; }
@@ -94,11 +103,11 @@
   #find-my-place form { padding: 13px !important; }
   #find-my-place form > div { gap: 12px !important; }
   #find-my-place form > div > div:nth-child(6) {
-    grid-template-columns: 40px minmax(0, 1fr) !important;
     padding: 13px 14px !important;
-    column-gap: 10px !important;
+    gap: 10px !important;
   }
   #find-my-place form > div > div:nth-child(6) > div:first-child {
+    flex-basis: 40px !important;
     width: 40px !important;
     max-width: 40px !important;
     min-width: 40px !important;
